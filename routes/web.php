@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TransaksiController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,6 +16,7 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 
-Route::get('/transaksi', function () {
-    return view('page.transaksi');
-})->name('transaksi');;
+Route::resource('transaksi', TransaksiController::class);
+// Route::get('/transaksi', function () {
+//     return view('page.transaksi');
+// })->name('transaksi');;
