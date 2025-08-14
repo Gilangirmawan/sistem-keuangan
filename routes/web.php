@@ -7,5 +7,14 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return view('/layout/app');
+    return view('/layouts/app');
 });
+
+Route::get('/dashboard', function () {
+    return view('page.dashboard');
+})->name('dashboard');
+
+
+Route::get('/transaksi', function () {
+    return view('page.transaksi');
+})->name('transaksi');;
