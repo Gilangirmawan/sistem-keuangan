@@ -17,11 +17,35 @@
         <i class="fas fa-home"></i> Dashboard
     </a>
 
-    <a href="{{ route('transaksi.index') }}"
-       class="flex items-center gap-3 px-4 py-2 rounded 
-       {{ request()->routeIs('transaksi.*') ? 'bg-sky-500 text-white' : 'hover:bg-gray-800' }}">
-        <i class="fas fa-credit-card"></i> Transaksi
-    </a>
+  <!-- Dropdown Transaksi -->
+<div x-data="{ open: false }" class="relative">
+    <!-- Menu Utama -->
+    <button @click="open = !open" 
+        class="flex items-center gap-3 px-4 py-2 rounded w-full text-left
+        {{ request()->routeIs('transaksi.*') ? 'bg-sky-500 text-white' : 'hover:bg-gray-800' }}">
+        <i class="fas fa-credit-card"></i>
+        <span>Transaksi</span>
+        <svg :class="{ 'rotate-180': open }" class="w-4 h-4 ml-auto transform transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+
+    <!-- Dropdown Items -->
+    <div x-show="open" x-transition 
+         @click.away="open = false" 
+         class="mt-1 ml-6 flex flex-col bg-gray-900 rounded shadow-lg overflow-hidden">
+
+        <a href="{{ route('pemasukan')}}" 
+           class="px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('pemasukan') ? 'bg-sky-500 text-white' : '' }}">
+            Pemasukan
+        </a>
+        
+        <a href="{{ route('pengeluaran')}}" 
+           class="px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('pengeluaran') ? 'bg-sky-500 text-white' : '' }}">
+            Pengeluaran
+        </a>
+    </div>
+</div>
 
     <a href="#"
        class="flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-800">

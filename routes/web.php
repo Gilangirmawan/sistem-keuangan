@@ -12,7 +12,7 @@ Route::get('/home', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('page.dashboard');
+    return view('admin.dashboard');
 })->name('dashboard');
 
 
@@ -20,3 +20,11 @@ Route::resource('transaksi', TransaksiController::class);
 // Route::get('/transaksi', function () {
 //     return view('page.transaksi');
 // })->name('transaksi');;
+
+Route::get('/pemasukan', function () {
+    return view('admin.pemasukan');
+})->name('pemasukan');
+
+Route::get('/pengeluaran', function () {
+    return view('admin.pengeluaran');
+})->name('pengeluaran');
