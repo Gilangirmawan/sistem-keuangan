@@ -17,6 +17,11 @@
         <i class="fas fa-home"></i> Dashboard
     </a>
 
+     <a href="{{route('kategori.index')}}"
+       class="flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-800">
+        <i class="fas fa-exchange-alt"></i> Kategori
+    </a>
+
   <!-- Dropdown Transaksi -->
 <div x-data="{ open: false }" class="relative">
     <!-- Menu Utama -->
@@ -47,10 +52,7 @@
     </div>
 </div>
 
-    <a href="#"
-       class="flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-800">
-        <i class="fas fa-exchange-alt"></i> Kategori
-    </a>
+   
 
     <a href="#"
        class="flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-800">

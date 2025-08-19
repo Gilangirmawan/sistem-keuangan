@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\KategoriController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,7 +33,12 @@ Route::get('/pengeluaran', function () {
 })->name('pengeluaran');
 
 
+Route::get('/kategori', function () {
+    return view('admin.kategori');
+})->name('kategori');
+
 #Route::resource('pemasukan', PemasukanController::class);
 
 Route::resource('pemasukan', PemasukanController::class);
 Route::resource('pengeluaran', PengeluaranController::class);
+Route::resource('kategori', KategoriController::class);
