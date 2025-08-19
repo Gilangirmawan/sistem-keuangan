@@ -18,7 +18,7 @@
     </a>
 
      <a href="{{route('kategori.index')}}"
-       class="flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-800">
+       class="flex items-center gap-3 px-4 py-2 rounded {{ request()->routeIs('kategori.index') ? 'bg-sky-500 text-white' : 'hover:bg-gray-800' }}">
         <i class="fas fa-exchange-alt"></i> Kategori
     </a>
 
