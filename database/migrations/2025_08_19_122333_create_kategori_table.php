@@ -9,24 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('pengeluarans', function (Blueprint $table) {
+        Schema::create('kategori', function (Blueprint $table) {
             $table->id();
-            $table->string('pengeluaran');
-            $table->string('kategori');
-            $table->decimal('jumlah', 15, 2);
-            $table->text('keterangan')->nullable();
+            $table->string('nama_kategori', 100)->unique();
+            $table->enum('jenis', ['pemasukan', 'pengeluaran']);
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengeluarans');
+        Schema::dropIfExists('kategori');
     }
 };

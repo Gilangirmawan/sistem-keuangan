@@ -33,9 +33,8 @@ Route::get('/pengeluaran', function () {
 })->name('pengeluaran');
 
 
-Route::get('/kategori', function () {
-    return view('admin.kategori');
-})->name('kategori');
+
+Route::resource('kategori', KategoriController::class);
 
 #Route::resource('pemasukan', PemasukanController::class);
 
