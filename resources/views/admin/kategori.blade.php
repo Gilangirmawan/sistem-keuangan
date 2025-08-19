@@ -18,9 +18,6 @@
                     <th class="px-4 py-2 border">No</th>
                     <th class="px-4 py-2 border">Nama Kategori</th>
                     <th class="px-4 py-2 border">Jenis</th>
-                    <th class="px-4 py-2 border">Keterangan</th>
-                    <th class="px-4 py-2 border">Pajak</th>
-                    <th class="px-4 py-2 border">Status</th>
                     <th class="px-4 py-2 border">Aksi</th>
                 </tr>
             </thead>
@@ -30,8 +27,6 @@
                         <td class="px-4 py-2 border">{{ $index + 1 }}</td>
                         <td class="px-4 py-2 border">{{ $item->nama }}</td>
                         <td class="px-4 py-2 border">{{ ucfirst($item->jenis) }}</td>
-                        <td class="px-4 py-2 border">{{ $item->keterangan }}</td>
-                        <td class="px-4 py-2 border">{{ $item->pajak ?? '-' }}</td>
                         <td class="px-4 py-2 border">
                             <span class="px-2 py-1 text-xs rounded 
                                 {{ $item->status == 'aktif' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800' }}">
@@ -72,21 +67,6 @@
                 <select name="jenis" class="w-full border rounded px-3 py-2">
                     <option value="pemasukan">Pemasukan</option>
                     <option value="pengeluaran">Pengeluaran</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label class="block">Keterangan</label>
-                <textarea name="keterangan" class="w-full border rounded px-3 py-2"></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="block">Pajak</label>
-                <input type="text" name="pajak" class="w-full border rounded px-3 py-2">
-            </div>
-            <div class="mb-3">
-                <label class="block">Status</label>
-                <select name="status" class="w-full border rounded px-3 py-2">
-                    <option value="aktif">Aktif</option>
-                    <option value="nonaktif">Nonaktif</option>
                 </select>
             </div>
             <div class="flex justify-end gap-2">

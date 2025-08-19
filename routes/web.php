@@ -5,6 +5,9 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\LabaController;
+use App\Http\Controllers\KasController;
+use App\Http\Controllers\BukuController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -42,3 +45,6 @@ Route::get('/kategori', function () {
 Route::resource('pemasukan', PemasukanController::class);
 Route::resource('pengeluaran', PengeluaranController::class);
 Route::resource('kategori', KategoriController::class);
+Route::resource('laba', LabaController::class);
+Route::resource('kas', KasController::class);
+Route::resource('buku', BukuController::class);

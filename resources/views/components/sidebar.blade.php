@@ -54,40 +54,41 @@
 
    
 
-    <a href="#"
-       class="flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-800">
-        <i class="fas fa-file-invoice-dollar"></i> Bill & Tax
-    </a>
+  <!-- Dropdown Laporan Keuangan -->
+<div x-data="{ open: false }" class="relative">
+    <!-- Menu Utama -->
+    <button @click="open = !open" 
+        class="flex items-center gap-3 px-4 py-2 rounded w-full text-left
+        {{ request()->routeIs('transaksi.*') ? 'bg-sky-500 text-white' : 'hover:bg-gray-800' }}">
+        <i class="fas fa-credit-card"></i>
+        <span>Laporan Keuangan</span>
+        <svg :class="{ 'rotate-180': open }" class="w-4 h-4 ml-auto transform transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
 
-    <a href="#"
-       class="flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-800">
-        <i class="fas fa-bell"></i> Notifications
-    </a>
+    <!-- Dropdown Items -->
+    <div x-show="open" x-transition 
+         @click.away="open = false" 
+         class="mt-1 ml-6 flex flex-col bg-gray-900 rounded shadow-lg overflow-hidden">
 
-    <a href="#"
-       class="flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-800">
-        <i class="fas fa-user"></i> Account
-    </a>
+        <a href="{{ route('laba.index') }}"
+            class="px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('pemasukan.*') ? 'bg-sky-500 text-white' : '' }}">
+            Laba Dan Rugi
+        </a>
+        
+        <a href="{{ route('buku.index')}}" 
+           class="px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('pengeluaran') ? 'bg-sky-500 text-white' : '' }}">
+            Buku Besar
+        </a>
 
-    <a href="#"
-       class="flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-800">
-        <i class="fas fa-id-card"></i> My Card
-    </a>
-
-    <a href="#"
-       class="flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-800">
-        <i class="fas fa-cog"></i> Settings
-    </a>
-
-    <a href="#"
-       class="flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-800">
-        <i class="fas fa-headset"></i> Call Center
-    </a>
-
-    <a href="#"
-       class="flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-800">
-        <i class="fas fa-question-circle"></i> Help
-    </a>
+        <a href="{{ route('kas.index')}}" 
+           class="px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('pengeluaran') ? 'bg-sky-500 text-white' : '' }}">
+            Arus Kas
+        </a>
+    </div>
+</div>
+    
 </nav>
 
 

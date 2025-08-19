@@ -14,11 +14,13 @@
         <table class="w-full border border-gray-300 text-sm text-left">
             <thead>
                 <tr class="bg-gray-100 text-gray-700">
-                    <th class="border px-3 py-2">No</th>
-                    <th class="border px-3 py-2">Pengeluaran</th>
-                    <th class="border px-3 py-2">Kategori</th>
-                    <th class="border px-3 py-2">Jumlah</th>
+                   <th class="border px-3 py-2">No</th>
                     <th class="border px-3 py-2">Keterangan</th>
+                    <th class="border px-3 py-2">Jenis</th>
+                    <th class="border px-3 py-2">Jumlah</th>
+                    <th class="border px-3 py-2">Total</th>
+                    <th class="border px-3 py-2">Tanggal</th>
+                    <th class="border px-3 py-2">Bukti Transaksi</th>
                     <th class="border px-3 py-2">Aksi</th>
                 </tr>
             </thead>
@@ -29,6 +31,8 @@
                     <td class="border px-3 py-2">{{ $item->pengeluaran }}</td>
                     <td class="border px-3 py-2">{{ $item->kategori }}</td>
                     <td class="border px-3 py-2">Rp {{ number_format($item->jumlah,0,',','.') }}</td>
+                    <td class="border px-3 py-2">{{ $item->keterangan }}</td>
+                    <td class="border px-3 py-2">{{ $item->keterangan }}</td>
                     <td class="border px-3 py-2">{{ $item->keterangan }}</td>
                     <td class="border px-3 py-2">
                         <div class="flex gap-2">
@@ -65,29 +69,32 @@
             @csrf
 
             <div>
-                <label class="block text-sm font-medium">Pengeluaran</label>
-                <input type="text" name="pengeluaran" class="w-full mt-1 border rounded px-3 py-2 focus:outline-red-500" required>
+                <label class="block text-sm font-medium">Keterangan</label>
+                <input type="text" name="pemasukan" class="w-full mt-1 border rounded px-3 py-2 focus:outline-sky-500" required>
             </div>
 
             <div>
-                <label class="block text-sm font-medium">Kategori</label>
-                <select name="kategori" class="w-full mt-1 border rounded px-3 py-2 focus:outline-red-500" required>
-                    <option value="">-- Pilih Kategori --</option>
-                    <option value="Belanja">Belanja</option>
-                    <option value="Transportasi">Transportasi</option>
-                    <option value="Tagihan">Tagihan</option>
-                    <option value="Lainnya">Lainnya</option>
+                <label class="block text-sm font-medium">Jenis</label>
+                <select name="kategori" class="w-full mt-1 border rounded px-3 py-2 focus:outline-sky-500" required>
+                    <option value="">-- Pilih Jenis --</option>
+                    <option value="Gaji">Gaji</option>
+                    <option value="Bonus">Bonus</option>
                 </select>
             </div>
 
             <div>
                 <label class="block text-sm font-medium">Jumlah</label>
-                <input type="number" name="jumlah" class="w-full mt-1 border rounded px-3 py-2 focus:outline-red-500" required>
+                <input type="number" name="jumlah" class="w-full mt-1 border rounded px-3 py-2 focus:outline-sky-500" required>
             </div>
 
             <div>
-                <label class="block text-sm font-medium">Keterangan</label>
-                <textarea name="keterangan" class="w-full mt-1 border rounded px-3 py-2 focus:outline-red-500"></textarea>
+                <label class="block text-sm font-medium">Tanggal</label>
+                <input type="date">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium">Bukti Transaksi</label>
+                <input type="file" name="Bukti" class="w-full mt-1 border rounded px-3 py-2 focus:outline-sky-500" required>
             </div>
 
             <div class="flex justify-end gap-3">
