@@ -1,100 +1,114 @@
-<!-- resources/views/home.blade.php -->
 @extends('layouts.app')
 
 @section('content')
+<div class="p-4">
+    <div class="flex justify-between items-center mb-3 mt-11">
+        <h2 class="text-lg font-semibold">Pencatatan Pengeluaran</h2>
+        <button onclick="toggleModal(true)" 
+                class="bg-red-500 hover:bg-red-600 text-white text-sm px-4 py-2 rounded-lg shadow">
+            + Tambah Data Pengeluaran
+        </button>
+    </div>
 
+    <div class="overflow-x-auto">
+        <table class="w-full border border-gray-300 text-sm text-left">
+            <thead>
+                <tr class="bg-gray-100 text-gray-700">
+                    <th class="border px-3 py-2">No</th>
+                    <th class="border px-3 py-2">Pengeluaran</th>
+                    <th class="border px-3 py-2">Kategori</th>
+                    <th class="border px-3 py-2">Jumlah</th>
+                    <th class="border px-3 py-2">Keterangan</th>
+                    <th class="border px-3 py-2">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($pengeluaran as $item)
+                <tr class="hover:bg-gray-50">
+                    <td class="border px-3 py-2">{{ $loop->iteration }}</td>
+                    <td class="border px-3 py-2">{{ $item->pengeluaran }}</td>
+                    <td class="border px-3 py-2">{{ $item->kategori }}</td>
+                    <td class="border px-3 py-2">Rp {{ number_format($item->jumlah,0,',','.') }}</td>
+                    <td class="border px-3 py-2">{{ $item->keterangan }}</td>
+                    <td class="border px-3 py-2">
+                        <div class="flex gap-2">
+                            <form action="{{ route('pengeluaran.destroy',$item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin hapus?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                            <a href="{{ route('pengeluaran.edit',$item->id) }}" 
+                               class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="6" class="text-center py-3 text-gray-500">Belum ada data pengeluaran</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
 
-<!-- Tambahkan Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Modal Tambah -->
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-6">
+        <h2 class="text-lg font-semibold mb-4">Tambah Data Pengeluaran</h2>
+
+        <form action="{{ route('pengeluaran.store') }}" method="POST" class="space-y-4">
+            @csrf
+
+            <div>
+                <label class="block text-sm font-medium">Pengeluaran</label>
+                <input type="text" name="pengeluaran" class="w-full mt-1 border rounded px-3 py-2 focus:outline-red-500" required>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium">Kategori</label>
+                <select name="kategori" class="w-full mt-1 border rounded px-3 py-2 focus:outline-red-500" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    <option value="Belanja">Belanja</option>
+                    <option value="Transportasi">Transportasi</option>
+                    <option value="Tagihan">Tagihan</option>
+                    <option value="Lainnya">Lainnya</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium">Jumlah</label>
+                <input type="number" name="jumlah" class="w-full mt-1 border rounded px-3 py-2 focus:outline-red-500" required>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium">Keterangan</label>
+                <textarea name="keterangan" class="w-full mt-1 border rounded px-3 py-2 focus:outline-red-500"></textarea>
+            </div>
+
+            <div class="flex justify-end gap-3">
+                <button type="button" onclick="toggleModal(false)" 
+                        class="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">
+                    Batal
+                </button>
+                <button type="submit" 
+                        class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                    Simpan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const ctx = document.getElementById('incomeChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
-            datasets: [
-                {
-                    label: 'Income',
-                    data: [1200000, 1500000, 1000000, 1800000, 1400000, 1700000, 1600000, 2000000, 1900000, 2100000, 2200000, 2500000],
-                    backgroundColor: 'rgba(34,197,94, 0.8)',
-                },
-                {
-                    label: 'Expense',
-                    data: [800000, 1200000, 900000, 1000000, 1100000, 1300000, 1000000, 1500000, 1400000, 1600000, 1500000, 1700000],
-                    backgroundColor: 'rgba(239,68,68, 0.8)',
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { position: 'top' }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            return 'Rp ' + value.toLocaleString('id-ID');
-                        }
-                    }
-                }
-            }
-        }
-    });
-});
+    function toggleModal(show) {
+        document.getElementById('modal').style.display = show ? 'flex' : 'none';
+    }
 </script>
 
- 
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 @endsection
-
-@push('scripts')
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const ctx = document.getElementById('incomeChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
-            datasets: [
-                {
-                    label: 'Income',
-                    data: [12000000, 15000000, 10000000, 18000000, 20000000, 17000000, 19000000, 21000000, 15000000, 16000000, 22000000, 25000000],
-                    backgroundColor: 'rgba(34,197,94, 0.8)', // Hijau
-                },
-                {
-                    label: 'Expense',
-                    data: [8000000, 9000000, 7000000, 12000000, 13000000, 11000000, 15000000, 14000000, 10000000, 9000000, 17000000, 18000000],
-                    backgroundColor: 'rgba(239,68,68, 0.8)', // Merah
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            return 'Rp ' + value.toLocaleString('id-ID');
-                        }
-                    }
-                }
-            }
-        }
-    });
-});
-</script>
-
-
-
-@endpush

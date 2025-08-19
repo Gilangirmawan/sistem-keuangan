@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\PemasukanController;
+use App\Http\Controllers\PengeluaranController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,3 +30,9 @@ Route::get('/pemasukan', function () {
 Route::get('/pengeluaran', function () {
     return view('admin.pengeluaran');
 })->name('pengeluaran');
+
+
+#Route::resource('pemasukan', PemasukanController::class);
+
+Route::resource('pemasukan', PemasukanController::class);
+Route::resource('pengeluaran', PengeluaranController::class);
