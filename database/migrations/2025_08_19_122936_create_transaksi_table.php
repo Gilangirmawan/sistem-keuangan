@@ -9,24 +9,23 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('pemasukans', function (Blueprint $table) {
+        Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
-            $table->string('pemasukan');
-            $table->string('kategori');
+            $table->enum('jenis_transaksi', ['pemasukan', 'pengeluaran']);
+            $table->foreignId('id_kategori')->constrained()->onDelete('cascade');
             $table->decimal('jumlah', 15, 2);
-            $table->text('keterangan')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }
 
-
-    /**
+    /** 
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('pemasukans');
+        Schema::dropIfExists('transaksi');
     }
 };
