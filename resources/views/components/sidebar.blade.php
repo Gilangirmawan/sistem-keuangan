@@ -40,7 +40,7 @@
          @click.away="open = false" 
          class="mt-1 ml-6 flex flex-col bg-gray-900 rounded shadow-lg overflow-hidden">
 
-        <a href="#"
+        <a href="{{ route('pemasukan.index') }}"
    class="px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('pemasukan.*') ? 'bg-sky-500 text-white' : '' }}">
     Pemasukan
 </a>

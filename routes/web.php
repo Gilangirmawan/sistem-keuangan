@@ -27,17 +27,9 @@ Route::resource('transaksi', TransaksiController::class);
 //     return view('page.transaksi');
 // })->name('transaksi');;
 
-Route::get('/pemasukan', function () {
-    return view('admin.pemasukan');
-})->name('pemasukan');
-
-Route::get('/pengeluaran', function () {
-    return view('admin.pengeluaran');
-})->name('pengeluaran');
+Route::resource('pemasukan', PemasukanController::class);
 
 
-
-Route::resource('kategori', KategoriController::class);
 
 #Route::resource('pemasukan', PemasukanController::class);
 
