@@ -41,9 +41,10 @@ Route::resource('kategori', KategoriController::class);
 
 #Route::resource('pemasukan', PemasukanController::class);
 
-Route::resource('pemasukan', PemasukanController::class);
-Route::resource('pengeluaran', PengeluaranController::class);
+// Route::resource('pemasukan', PemasukanController::class);
+// Route::resource('pengeluaran', PengeluaranController::class);
 Route::resource('kategori', KategoriController::class);
 Route::resource('laba', LabaController::class);
 Route::resource('kas', KasController::class);
 Route::resource('buku', BukuController::class);
+Route::resource('transaksi', TransaksiController::class);

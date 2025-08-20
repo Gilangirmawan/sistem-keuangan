@@ -9,9 +9,13 @@ class TransaksiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function pemasukan()
     {
-        return view('page.transaksi');
+        return view('admin.pemasukan');
+    }
+    public function pengeluaran()
+    {
+        return view('admin.pengeluaran');
     }
 
     /**

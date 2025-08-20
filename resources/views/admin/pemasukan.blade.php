@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 <div class="p-4">
@@ -124,4 +124,6 @@
 
 <!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-@endsection
+@endsection --}}
+
+<h1>asdf</h1>

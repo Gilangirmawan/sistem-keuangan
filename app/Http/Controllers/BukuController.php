@@ -11,7 +11,7 @@ class BukuController extends Controller
      */
     public function index()
     {
-        return view('admin.laba');
+        return view('admin.buku');
     }
 
     /**
