@@ -1,121 +1,186 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="p-4">
-    <div class="flex justify-between items-center mb-3 mt-11">
-        <h2 class="text-lg font-semibold">Pencatatan Pengeluaran</h2>
-        <button onclick="toggleModal(true)" 
-                class="bg-red-500 hover:bg-red-600 text-white text-sm px-4 py-2 rounded-lg shadow">
+<div class="p-6">
+    <div class="flex justify-between items-center mb-4 mt-11">
+        <h2 class="text-lg font-semibold">Manajemen Pengeluaran</h2>
+        <button onclick="document.getElementById('modalTambah').classList.remove('hidden')" 
+                class="bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-lg shadow">
             + Tambah Data Pengeluaran
         </button>
     </div>
 
-    <div class="overflow-x-auto">
-        <table class="w-full border border-gray-300 text-sm text-left">
-            <thead>
-                <tr class="bg-gray-100 text-gray-700">
-                   <th class="border px-3 py-2">No</th>
-                    <th class="border px-3 py-2">Keterangan</th>
-                    <th class="border px-3 py-2">Jenis</th>
-                    <th class="border px-3 py-2">Jumlah</th>
-                    <th class="border px-3 py-2">Total</th>
-                    <th class="border px-3 py-2">Tanggal</th>
-                    <th class="border px-3 py-2">Bukti Transaksi</th>
-                    <th class="border px-3 py-2">Aksi</th>
+    <!-- Table -->
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3">No</th>
+                    <th class="px-6 py-3">Keterangan</th>
+                    <th class="px-6 py-3">Kategori</th>
+                    <th class="px-6 py-3">Jumlah</th>
+                    <th class="px-6 py-3">Total</th>
+                    <th class="px-6 py-3">Bukti</th>
+                    <th class="px-6 py-3">Tanggal</th>
+                    <th class="px-6 py-3">Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($pengeluaran as $item)
-                <tr class="hover:bg-gray-50">
-                    <td class="border px-3 py-2">{{ $loop->iteration }}</td>
-                    <td class="border px-3 py-2">{{ $item->pengeluaran }}</td>
-                    <td class="border px-3 py-2">{{ $item->kategori }}</td>
-                    <td class="border px-3 py-2">Rp {{ number_format($item->jumlah,0,',','.') }}</td>
-                    <td class="border px-3 py-2">{{ $item->keterangan }}</td>
-                    <td class="border px-3 py-2">{{ $item->keterangan }}</td>
-                    <td class="border px-3 py-2">{{ $item->keterangan }}</td>
-                    <td class="border px-3 py-2">
-                        <div class="flex gap-2">
-                            <form action="{{ route('pengeluaran.destroy',$item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin hapus?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                            <a href="{{ route('pengeluaran.edit',$item->id) }}" 
-                               class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                        </div>
+                @php $no = 1; $grandTotal = 0; @endphp
+                @foreach($pengeluaran as $item)
+                @php $grandTotal += $item->total; @endphp
+                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                    <td class="px-6 py-4">{{ $no++ }}</td>
+                    <td class="px-6 py-4">{{ $item->keterangan ?? '-' }}</td>
+                    <td class="px-6 py-4">{{ $item->kategori->nama_kategori ?? '-' }}</td>
+                    <td class="px-6 py-4">Rp {{ number_format($item->jumlah, 0, ',', '.') }}</td>
+                    <td class="px-6 py-4 font-semibold text-green-600">Rp {{ number_format($item->total, 0, ',', '.') }}</td>
+                    <td class="px-6 py-4">
+                        @if($item->bukti_transaksi)
+                            <a href="{{ asset('storage/' . $item->bukti_transaksi) }}" target="_blank" 
+                               class="text-sky-500 underline">Lihat</a>
+                        @else
+                            <span class="text-gray-400">-</span>
+                        @endif
+                    </td>
+                    <td class="px-6 py-4">{{ $item->created_at->format('d-m-Y') }}</td>
+                    <td class="px-6 py-4 flex gap-2">
+                        <button onclick="openEditModal({{ $item->id }}, '{{ $item->keterangan }}', '{{ $item->id_kategori }}', '{{ $item->jumlah }}', '{{ $item->total }}')" 
+                                class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded">Edit</button>
+                        <button onclick="openDeleteModal({{ $item->id }})" 
+                                class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded">Hapus</button>
                     </td>
                 </tr>
-                @empty
+                @endforeach
+                @if($pengeluaran->isEmpty())
                 <tr>
-                    <td colspan="6" class="text-center py-3 text-gray-500">Belum ada data pengeluaran</td>
+                    <td colspan="8" class="text-center py-3">Belum ada data pengeluaran.</td>
                 </tr>
-                @endforelse
+                @endif
             </tbody>
+            <tfoot class="bg-gray-50">
+                <tr>
+                    <td colspan="4" class="px-6 py-3 font-bold text-right">Grand Total</td>
+                    <td class="px-6 py-3 font-bold text-green-600">Rp {{ number_format($grandTotal, 0, ',', '.') }}</td>
+                    <td colspan="3"></td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>
 
 <!-- Modal Tambah -->
-<div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
-    <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-6">
-        <h2 class="text-lg font-semibold mb-4">Tambah Data Pengeluaran</h2>
-
-        <form action="{{ route('pengeluaran.store') }}" method="POST" class="space-y-4">
+<div id="modalTambah" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg w-1/3 shadow-lg">
+        <h3 class="text-lg font-semibold mb-4">Tambah Data Pengeluaran</h3>
+        <form action="{{ route('pengeluaran.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-
-            <div>
-                <label class="block text-sm font-medium">Keterangan</label>
-                <input type="text" name="pemasukan" class="w-full mt-1 border rounded px-3 py-2 focus:outline-sky-500" required>
+            <div class="mb-3">
+                <label class="block">Keterangan</label>
+                <input type="text" name="keterangan" class="w-full border rounded px-3 py-2">
             </div>
-
-            <div>
-                <label class="block text-sm font-medium">Jenis</label>
-                <select name="kategori" class="w-full mt-1 border rounded px-3 py-2 focus:outline-sky-500" required>
-                    <option value="">-- Pilih Jenis --</option>
-                    <option value="Gaji">Gaji</option>
-                    <option value="Bonus">Bonus</option>
+            <div class="mb-3">
+                <label class="block">Kategori</label>
+                <select name="id_kategori" class="w-full border rounded px-3 py-2" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    @foreach($kategori as $k)
+                        @if($k->jenis == 'pengeluaran')
+                            <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
+                        @endif
+                    @endforeach
                 </select>
             </div>
-
-            <div>
-                <label class="block text-sm font-medium">Jumlah</label>
-                <input type="number" name="jumlah" class="w-full mt-1 border rounded px-3 py-2 focus:outline-sky-500" required>
+            <div class="mb-3">
+                <label class="block">Jumlah</label>
+                <input type="number" step="0.01" name="jumlah" class="w-full border rounded px-3 py-2" required>
             </div>
-
-            <div>
-                <label class="block text-sm font-medium">Tanggal</label>
-                <input type="date">
+            <div class="mb-3">
+                <label class="block">Total</label>
+                <input type="number" step="0.01" name="total" class="w-full border rounded px-3 py-2" required>
             </div>
-
-            <div>
-                <label class="block text-sm font-medium">Bukti Transaksi</label>
-                <input type="file" name="Bukti" class="w-full mt-1 border rounded px-3 py-2 focus:outline-sky-500" required>
+            <div class="mb-3">
+                <label class="block">Bukti Transaksi</label>
+                <input type="file" name="bukti_transaksi" class="w-full border rounded px-3 py-2">
             </div>
-
-            <div class="flex justify-end gap-3">
-                <button type="button" onclick="toggleModal(false)" 
-                        class="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">
-                    Batal
-                </button>
-                <button type="submit" 
-                        class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
-                    Simpan
-                </button>
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="document.getElementById('modalTambah').classList.add('hidden')" class="px-4 py-2 bg-gray-400 rounded">Batal</button>
+                <button type="submit" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded">Simpan</button>
             </div>
         </form>
     </div>
 </div>
 
+<!-- Modal Edit -->
+<div id="modalEdit" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg w-1/3 shadow-lg">
+        <h3 class="text-lg font-semibold mb-4">Edit Data Pengeluaran</h3>
+        <form id="formEdit" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="mb-3">
+                <label class="block">Keterangan</label>
+                <input type="text" id="editKeterangan" name="keterangan" class="w-full border rounded px-3 py-2">
+            </div>
+            <div class="mb-3">
+                <label class="block">Kategori</label>
+                <select id="editKategori" name="id_kategori" class="w-full border rounded px-3 py-2">
+                    @foreach($kategori as $k)
+                        @if($k->jenis == 'pengeluaran')
+                            <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="block">Jumlah</label>
+                <input type="number" step="0.01" id="editJumlah" name="jumlah" class="w-full border rounded px-3 py-2" required>
+            </div>
+            <div class="mb-3">
+                <label class="block">Total</label>
+                <input type="number" step="0.01" id="editTotal" name="total" class="w-full border rounded px-3 py-2" required>
+            </div>
+            <div class="mb-3">
+                <label class="block">Bukti Transaksi (kosongkan jika tidak diganti)</label>
+                <input type="file" name="bukti_transaksi" class="w-full border rounded px-3 py-2">
+            </div>
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="document.getElementById('modalEdit').classList.add('hidden')" class="px-4 py-2 bg-gray-400 rounded">Batal</button>
+                <button type="submit" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Hapus -->
+<div id="modalDelete" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg w-1/3 shadow-lg">
+        <h3 class="text-lg font-semibold mb-4">Konfirmasi Hapus</h3>
+        <p class="mb-4">Apakah anda yakin ingin menghapus pengeluaran ini?</p>
+        <form id="formDelete" method="POST">
+            @csrf
+            @method('DELETE')
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="document.getElementById('modalDelete').classList.add('hidden')" class="px-4 py-2 bg-gray-400 rounded">Batal</button>
+                <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded">Hapus</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Script -->
 <script>
-    function toggleModal(show) {
-        document.getElementById('modal').style.display = show ? 'flex' : 'none';
+    function openEditModal(id, keterangan, idKategori, jumlah, total) {
+        document.getElementById('modalEdit').classList.remove('hidden');
+        document.getElementById('editKeterangan').value = keterangan;
+        document.getElementById('editKategori').value = idKategori;
+        document.getElementById('editJumlah').value = jumlah;
+        document.getElementById('editTotal').value = total;
+        document.getElementById('formEdit').action = '/pengeluaran/' + id;
+    }
+
+    function openDeleteModal(id) {
+        document.getElementById('modalDelete').classList.remove('hidden');
+        document.getElementById('formDelete').action = '/pengeluaran/' + id;
     }
 </script>
-
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 @endsection

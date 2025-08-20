@@ -28,6 +28,7 @@ Route::resource('transaksi', TransaksiController::class);
 // })->name('transaksi');;
 
 Route::resource('pemasukan', PemasukanController::class);
+Route::resource('pengeluaran', PengeluaranController::class);
 
 
 

@@ -45,8 +45,8 @@
     Pemasukan
 </a>
         
-        <a href="#" 
-           class="px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('pengeluaran') ? 'bg-sky-500 text-white' : '' }}">
+        <a href="{{ route('pengeluaran.index') }}" 
+           class="px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('pengeluaran.*') ? 'bg-sky-500 text-white' : '' }}">
             Pengeluaran
         </a>
     </div>
