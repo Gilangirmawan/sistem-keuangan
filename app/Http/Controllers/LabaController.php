@@ -2,63 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class LabaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.laba');
-    }
+        $bulan = $request->input('bulan', Carbon::now()->month);
+        $tahun = $request->input('tahun', Carbon::now()->year);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        // Buat query dasar untuk filter bulan dan tahun
+        $query = Transaksi::whereYear('created_at', $tahun)
+                          ->whereMonth('created_at', $bulan);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // Hitung total pemasukan dan pengeluaran dari SEMUA data yang difilter (sebelum pagination)
+        $totalPemasukan = (clone $query)->where('jenis_transaksi', 'pemasukan')->sum('total');
+        $totalPengeluaran = (clone $query)->where('jenis_transaksi', 'pengeluaran')->sum('total');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $laporan = (clone $query)->with('kategori')
+                                 ->latest()
+                                 ->paginate(5);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $labaBersih = $totalPemasukan - $totalPengeluaran;
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('admin.laba', compact(
+            'laporan',
+            'totalPemasukan',
+            'totalPengeluaran',
+            'labaBersih',
+            'bulan',
+            'tahun'
+        ));
     }
 }

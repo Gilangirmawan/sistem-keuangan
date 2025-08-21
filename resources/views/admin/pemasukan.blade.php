@@ -17,7 +17,7 @@
                 <tr>
                     <th class="px-6 py-3">No</th>
                     <th class="px-6 py-3">Keterangan</th>
-                    <th class="px-6 py-3">Kategori</th>
+                    <th class="px-6 py-3">Nama Kategori</th>
                     <th class="px-6 py-3">Jumlah</th>
                     <th class="px-6 py-3">Total</th>
                     <th class="px-6 py-3">Bukti</th>
@@ -33,12 +33,12 @@
                     <td class="px-6 py-4">{{ $no++ }}</td>
                     <td class="px-6 py-4">{{ $item->keterangan ?? '-' }}</td>
                     <td class="px-6 py-4">{{ $item->kategori->nama_kategori ?? '-' }}</td>
-                    <td class="px-6 py-4">Rp {{ number_format($item->jumlah, 0, ',', '.') }}</td>
+                    <td class="px-6 py-4">{{ number_format($item->jumlah, 0, ',', '.') }}</td>
                     <td class="px-6 py-4 font-semibold text-green-600">Rp {{ number_format($item->total, 0, ',', '.') }}</td>
                     <td class="px-6 py-4">
                         @if($item->bukti_transaksi)
                             <a href="{{ asset('storage/' . $item->bukti_transaksi) }}" target="_blank" 
-                               class="text-sky-500 underline">Lihat</a>
+                                class="text-sky-500 underline">Lihat</a>
                         @else
                             <span class="text-gray-400">-</span>
                         @endif

@@ -166,7 +166,7 @@
     </div>
 </div>
 
-<!-- Script -->
+
 <script>
     function showTab(tab) {
         document.getElementById('tab-pemasukan').classList.add('hidden');

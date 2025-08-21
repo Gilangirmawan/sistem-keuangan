@@ -37,7 +37,7 @@ Route::resource('pengeluaran', PengeluaranController::class);
 // Route::resource('pemasukan', PemasukanController::class);
 // Route::resource('pengeluaran', PengeluaranController::class);
 Route::resource('kategori', KategoriController::class);
-Route::resource('laba', LabaController::class);
+Route::get('laba', [LabaController::class, 'index'])->name('laba.index');
 Route::resource('kas', KasController::class);
 Route::resource('buku', BukuController::class);
 Route::resource('transaksi', TransaksiController::class);
