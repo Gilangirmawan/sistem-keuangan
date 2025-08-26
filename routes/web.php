@@ -41,3 +41,8 @@ Route::get('laba', [LabaController::class, 'index'])->name('laba.index');
 Route::resource('kas', KasController::class);
 Route::resource('buku', BukuController::class);
 Route::resource('transaksi', TransaksiController::class);
+
+
+Route::get('/login', function () {
+    return view('admin.auth.login_admin');
+});
