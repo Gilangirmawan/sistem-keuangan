@@ -92,10 +92,16 @@
 </nav>
 
 
-    <!-- Logout -->
-    <div class="p-4 border-t border-gray-700">
-        <a href="#" class="flex items-center gap-3 text-red-400 hover:text-red-300">
+<!-- Logout -->
+<div class="p-4 border-t border-gray-700">
+    {{-- Form ini akan mengirim request POST ke route 'logout' --}}
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <a href="{{ route('logout') }}" 
+           onclick="event.preventDefault(); this.closest('form').submit();"
+           class="flex items-center gap-3 text-red-400 hover:text-red-300">
             <i class="fas fa-sign-out-alt"></i> Log Out
         </a>
-    </div>
+    </form>
+</div>
 </aside>
