@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\LabaController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PengeluaranController;
@@ -24,18 +25,24 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
 
-// Dashboard → hanya untuk admin yang sudah login
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'admin'])->name('dashboard');
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+    
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-// Resource routes → hanya untuk admin yang sudah login
-Route::middleware(['auth', 'admin'])->group(function () {
+    // Laporan Laba Rugi
+    Route::get('laba', [LabaController::class, 'index'])->name('laba.index');
+    
+    // Ekspor Buku Besar
+    Route::get('buku/export/pdf', [BukuController::class, 'exportPdf'])->name('buku.export.pdf');
+    Route::get('buku/export/csv', [BukuController::class, 'exportCsv'])->name('buku.export.csv');
+
+    // Resource Controllers
     Route::resource('transaksi', TransaksiController::class);
     Route::resource('pemasukan', PemasukanController::class);
     Route::resource('pengeluaran', PengeluaranController::class);
     Route::resource('kategori', KategoriController::class);
-    Route::get('laba', [LabaController::class, 'index'])->name('laba.index');
     Route::resource('kas', KasController::class);
     Route::resource('buku', BukuController::class);
+
 });

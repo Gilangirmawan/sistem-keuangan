@@ -103,7 +103,7 @@
 <div id="modalTambah" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
     <div class="bg-white p-6 rounded-lg w-1/3 shadow-lg">
         <h3 class="text-lg font-semibold mb-4">Tambah Data Kategori</h3>
-        <form action="{{ route('kategori.store') }}" method="POST">
+        <form action="{{ route('admin.kategori.store') }}" method="POST">
             @csrf
             <div class="mb-3">
                 <label class="block">Nama Kategori</label>

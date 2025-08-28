@@ -9,7 +9,7 @@
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 mt-11">
         <h2 class="text-lg font-semibold mb-2 sm:mb-0">Laporan Laba Rugi</h2>
         
-        <form action="{{ route('laba.index') }}" method="GET" class="flex items-center gap-2">
+        <form action="{{ route('admin.laba.index') }}" method="GET" class="flex items-center gap-2">
             <select name="bulan" class="border rounded-lg px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:ring-sky-500">
                 @for ($m = 1; $m <= 12; $m++)
                     <option value="{{ $m }}" {{ $bulan == $m ? 'selected' : '' }}>

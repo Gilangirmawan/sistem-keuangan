@@ -30,7 +30,7 @@ class AuthController extends Controller
 
             // Cek role admin
             if (Auth::user()->role_id == 1) {
-                return redirect()->intended('/dashboard');
+                return redirect()->intended('/admin/dashboard');
             }
 
             Auth::logout();

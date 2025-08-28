@@ -11,14 +11,14 @@
 
     <!-- Menu -->
 <nav class="flex-1 p-2 space-y-1">
-    <a href="{{ route('dashboard') }}"
+    <a href="{{ route('admin.dashboard') }}"
        class="flex items-center gap-3 px-4 py-2 rounded 
        {{ request()->routeIs('dashboard') ? 'bg-sky-500 text-white' : 'hover:bg-gray-800' }}">
         <i class="fas fa-home"></i> Dashboard
     </a>
 
-     <a href="{{route('kategori.index')}}"
-       class="flex items-center gap-3 px-4 py-2 rounded {{ request()->routeIs('kategori.index') ? 'bg-sky-500 text-white' : 'hover:bg-gray-800' }}">
+     <a href="{{route('admin.kategori.index')}}"
+       class="flex items-center gap-3 px-4 py-2 rounded {{ request()->routeIs('admin.kategori.index') ? 'bg-sky-500 text-white' : 'hover:bg-gray-800' }}">
         <i class="fas fa-exchange-alt"></i> Kategori
     </a>
 
@@ -40,12 +40,12 @@
          @click.away="open = false" 
          class="mt-1 ml-6 flex flex-col bg-gray-900 rounded shadow-lg overflow-hidden">
 
-        <a href="{{ route('pemasukan.index') }}"
+        <a href="{{ route('admin.pemasukan.index') }}"
    class="px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('pemasukan.*') ? 'bg-sky-500 text-white' : '' }}">
     Pemasukan
 </a>
         
-        <a href="{{ route('pengeluaran.index') }}" 
+        <a href="{{ route('admin.pengeluaran.index') }}" 
            class="px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('pengeluaran.*') ? 'bg-sky-500 text-white' : '' }}">
             Pengeluaran
         </a>
@@ -72,17 +72,17 @@
          @click.away="open = false" 
          class="mt-1 ml-6 flex flex-col bg-gray-900 rounded shadow-lg overflow-hidden">
 
-        <a href="{{ route('laba.index') }}"
+        <a href="{{ route('admin.laba.index') }}"
             class="px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('pemasukan.*') ? 'bg-sky-500 text-white' : '' }}">
             Laba Dan Rugi
         </a>
         
-        <a href="{{ route('buku.index')}}" 
+        <a href="{{ route('admin.buku.index')}}" 
            class="px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('pengeluaran') ? 'bg-sky-500 text-white' : '' }}">
             Buku Besar
         </a>
 
-        <a href="{{ route('kas.index')}}" 
+        <a href="{{ route('admin.kas.index')}}" 
            class="px-4 py-2 hover:bg-gray-800 {{ request()->routeIs('pengeluaran') ? 'bg-sky-500 text-white' : '' }}">
             Arus Kas
         </a>
