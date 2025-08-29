@@ -13,11 +13,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('role_id')->nullable();
             $table->string('nama', 100);
             $table->string('email')->unique();
-            $table->enum('role', ['admin', 'staff', 'manager']); 
             $table->string('password');
             $table->timestamps();
+
+            $table->foreign('role_id')
+                  ->references('id')
+                  ->on('roles')
+                  ->onDelete('cascade');
         });
     }
 
