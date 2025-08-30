@@ -13,7 +13,7 @@ use App\Http\Controllers\PengeluaranController;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+})->middleware('guest')->name('home');  
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])
     ->middleware('guest')
