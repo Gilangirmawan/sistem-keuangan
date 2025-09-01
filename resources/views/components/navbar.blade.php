@@ -1,16 +1,21 @@
-<!-- resources/views/partials/navbar.blade.php -->
-<nav class="fixed top-0 left-64 right-0 z-40 bg-gradient-to-r from-sky-600 to-blue-500 text-white ">
-    <div class="flex items-center justify-between px-6 py-3">
+<nav class="bg-gradient-to-r from-sky-600 to-blue-500 text-white shadow-md">
+    <div class="flex items-center justify-between px-4 py-3">
         
-        <!-- Left: Logo -->
+        <div class="flex items-center">
+            <button @click.stop="sidebarOpen = !sidebarOpen" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <div class="hidden md:block ml-4">
+                {{-- <h1 class="text-lg font-semibold text-white">@yield('title', 'Dashboard')</h1> --}}
+            </div>
+        </div>
 
-        <!-- Middle: Welcome + Search -->
-
-        <!-- Right: Profile -->
-        <div class="flex place-items-end space-x-3 ml-auto">
-            <div class="text-right">
-                <p class="font-semibold">Admin</p>
-                <p class="text-xs text-gray-200">Administrator</p>
+        <div class="flex items-center space-x-3">
+            <div class="text-right hidden sm:block">
+                <p class="font-semibold">{{ Auth::user()->name ?? 'Admin' }}</p>
+                <p class="text-xs text-gray-200">{{ Auth::user()->role ?? 'Administrator' }}</p>
             </div>
             <img src="/images/user.jpg" alt="User" class="w-10 h-10 rounded-full border-2 border-white">
         </div>

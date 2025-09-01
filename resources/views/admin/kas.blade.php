@@ -2,8 +2,6 @@
 
 @section('content')
 
-< class="p-4 sm:p-6 md:p-8">
-
     <div class="max-w-7xl mx-auto mt-14">
 
         <header class="flex flex-col sm:flex-row justify-between sm:items-center mb-6">

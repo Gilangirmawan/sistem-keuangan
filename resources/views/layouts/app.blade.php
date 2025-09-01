@@ -1,4 +1,3 @@
-<!-- resources/views/layouts/app.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,21 +6,21 @@
     <title>@yield('title', 'Dashboard')</title>
     @vite('resources/css/app.css')
     <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 </head>
 <body class="bg-gray-100 font-sans">
 
-    <div class="flex min-h-screen">
+    <div x-data="{ sidebarOpen: false }" class="relative min-h-screen md:flex">
 
-        {{-- Sidebar --}}
+        <div @click="sidebarOpen = false" x-show="sidebarOpen" class="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden" style="display: none;"></div>
+
         @include('components.sidebar')
 
-        <div class="flex-1 flex flex-col">
+        <div class="flex-1 flex flex-col md:ml-64">
             
-            {{-- Navbar --}}
             @include('components.navbar')
 
-            {{-- Main Content --}}
-            <main class="flex-1 p-6">
+            <main class="flex-1 p-4 md:p-6">
                 @yield('content')
             </main>
         </div>
@@ -30,6 +29,4 @@
 
     @stack('scripts')
 </body>
-
-
 </html>
