@@ -77,10 +77,10 @@
   </div>
 
   <!-- Pagination (Dihapus karena controller belum menggunakan pagination) -->
-  {{-- 
-  <div class="mt-4 flex justify-center">
+  
+  {{-- <div class="mt-4 flex justify-center">
     ...
-  </div>
+  </div> --}}
 </div>
 
 @endsection

@@ -13,6 +13,10 @@ class PengeluaranController extends Controller
     {
         $pengeluaran = Transaksi::where('jenis_transaksi', 'pengeluaran')->with('kategori')->latest()->get();
         $kategori = Kategori::all();
+        $pengeluaran = Transaksi::where('jenis_transaksi', 'pengeluaran')
+            ->with('kategori')
+            ->latest()
+            ->paginate(5); // <-- pagination aktif
 
         return view('admin.pengeluaran', compact('pengeluaran', 'kategori'));
     }

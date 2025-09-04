@@ -11,7 +11,12 @@ class PemasukanController extends Controller
 {
     public function index()
     {
-        $pemasukan = Transaksi::where('jenis_transaksi', 'pemasukan')->with('kategori')->latest()->get();
+        // Ambil data pemasukan dengan relasi kategori + pagination
+        $pemasukan = Transaksi::where('jenis_transaksi', 'pemasukan')
+            ->with('kategori')
+            ->latest()
+            ->paginate(5); // <-- pagination aktif
+
         $kategori = Kategori::all();
 
         return view('admin.pemasukan', compact('pemasukan', 'kategori'));
@@ -21,6 +26,7 @@ class PemasukanController extends Controller
     {
         $request->validate([
             'id_kategori'     => 'required|exists:kategori,id',
+            'jumlah'          => 'required|numeric|min:0',
             'total'           => 'required|numeric|min:0',
             'keterangan'      => 'nullable|string|max:255',
             'bukti_transaksi' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
@@ -43,9 +49,6 @@ class PemasukanController extends Controller
         return redirect()->back()->with('success', 'Data pemasukan berhasil ditambahkan');
     }
 
-    /**
-     * Perbaikan: Mengubah nama variabel dari $transaksi menjadi $pemasukan
-     */
     public function update(Request $request, Transaksi $pemasukan)
     {
         $request->validate([
@@ -75,9 +78,6 @@ class PemasukanController extends Controller
         return redirect()->back()->with('success', 'Data pemasukan berhasil diperbarui');
     }
 
-    /**
-     * Perbaikan: Mengubah nama variabel dari $transaksi menjadi $pemasukan
-     */
     public function destroy(Transaksi $pemasukan)
     {
         if ($pemasukan->bukti_transaksi && Storage::disk('public')->exists($pemasukan->bukti_transaksi)) {

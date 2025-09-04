@@ -66,6 +66,9 @@
                 </tr>
             </tfoot>
         </table>
+        <div class="p-4 ">
+    {{ $pengeluaran->links() }}
+</div>
     </div>
 </div>
 

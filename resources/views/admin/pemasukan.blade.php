@@ -66,6 +66,10 @@
                 </tr>
             </tfoot>
         </table>
+
+        <div class="p-4 ">
+    {{ $pemasukan->links() }}
+</div>
     </div>
 </div>
 
@@ -164,6 +168,10 @@
                 <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded">Hapus</button>
             </div>
         </form>
+    </div>
+
+    <div class="mt-4">
+        {{ $pemasukan->appends(request()->query())->links() }}
     </div>
 </div>
 

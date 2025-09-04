@@ -1,4 +1,4 @@
-<nav class="bg-gradient-to-r from-sky-600 to-blue-500 text-white shadow-md">
+<nav class="bg-gradient-to-r fixed w-full z-10 from-sky-600 to-blue-500 text-white shadow-md py-5">
     <div class="flex items-center justify-between px-4 py-3">
         
         <div class="flex items-center">
@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-3 fixed right-4 ">
             <div class="text-right hidden sm:block">
                 <p class="font-semibold">{{ Auth::user()->name ?? 'Admin' }}</p>
                 <p class="text-xs text-gray-200">{{ Auth::user()->role ?? 'Administrator' }}</p>
