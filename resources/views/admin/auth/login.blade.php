@@ -7,9 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
-<body class="bg-gradient-to-b from-sky-900 to-sky-600 min-h-screen flex flex-col">
 
-    <!-- NAVBAR -->
+
+<body class="bg-gradient-to-b from-green-700 to-green-900 min-h-screen flex flex-col">
+
+
+    
+
+
+    {{-- <!-- NAVBAR -->
     <nav class="bg-sky-900 text-white shadow-md">
         <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
             <!-- Logo -->
@@ -26,14 +32,19 @@
                 <a href="{{ route('login') }}" class="font-semibold hover:text-sky-300">Log In</a>
             </div>
         </div>
-    </nav>
+    </nav> --}}
 
     <!-- LOGIN CARD -->
     <div class="flex-grow flex items-center justify-center px-4">
-        <div class="bg-slate-300 rounded-xl shadow-lg p-8 w-full max-w-md">
-            <h2 class="text-2xl font-bold text-center text-sky-900 mb-6">Log In</h2>
+        <div class="bg-slate-300 rounded-xl shadow-lg p-8 w-full max-w-md ">
+        
+            {{-- <h2 class="text-2xl font-bold text-center text-sky-900 mb-6">Log In</h2> --}}
             
             {{-- Form dihubungkan ke route 'login.post' dengan method POST --}}
+
+            <div>
+                <img src="{{ asset('img/hijau.png') }}" alt="logo" class="w-64 flex m-auto ">
+            </div>
             <form action="{{ route('login.post') }}" method="POST">
                 @csrf {{-- Token keamanan Laravel, wajib ada --}}
 
@@ -86,8 +97,8 @@
                 </div>
 
                 <!-- Submit Button -->
-                <div class="flex justify-center">
-                    <button type="submit" class="w-56 bg-sky-700 text-white py-2 rounded-2xl hover:bg-sky-800">Log In</button>
+                <div class="flex justify-center ">
+                    <button type="submit" class="w-56 bg-black text-white py-2 rounded-2xl hover:bg-sky-800">Log In</button>
                 </div>
             </form>
         </div>

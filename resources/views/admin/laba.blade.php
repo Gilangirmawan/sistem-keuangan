@@ -10,19 +10,19 @@
         <h2 class="text-lg font-semibold mb-2 sm:mb-0">Laporan Laba Rugi</h2>
         
         <form action="{{ route('admin.laba.index') }}" method="GET" class="flex items-center gap-2">
-            <select name="bulan" class="border rounded-lg px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:ring-sky-500">
+            <select name="bulan" class="border rounded-lg px-3 py-2 text-sm shadow-sm focus:border-black focus:ring-black">
                 @for ($m = 1; $m <= 12; $m++)
                     <option value="{{ $m }}" {{ $bulan == $m ? 'selected' : '' }}>
                         {{ \Carbon\Carbon::create()->month($m)->isoFormat('MMMM') }}
                     </option>
                 @endfor
             </select>
-            <select name="tahun" class="border rounded-lg px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:ring-sky-500">
+            <select name="tahun" class="border rounded-lg px-3 py-2 text-sm shadow-sm focus:border-black focus:ring-black">
                 @for ($y = date('Y'); $y >= date('Y') - 5; $y--)
                     <option value="{{ $y }}" {{ $tahun == $y ? 'selected' : '' }}>{{ $y }}</option>
                 @endfor
             </select>
-            <button type="submit" class="bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-lg shadow text-sm">
+            <button type="submit" class="bg-black hover:bg-green-500 text-white px-4 py-2 rounded-lg shadow text-sm">
                 Filter
             </button>
         </form>

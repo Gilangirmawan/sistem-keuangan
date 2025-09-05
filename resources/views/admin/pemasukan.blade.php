@@ -5,7 +5,7 @@
     <div class="flex justify-between items-center mb-4 mt-11">
         <h2 class="text-lg font-semibold">Manajemen Pemasukan</h2>
         <button onclick="document.getElementById('modalTambah').classList.remove('hidden')" 
-                class="bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-lg shadow">
+                class="bg-black hover:bg-green-500 text-white px-4 py-2 rounded-lg shadow">
             + Tambah Data Pemasukan
         </button>
     </div>

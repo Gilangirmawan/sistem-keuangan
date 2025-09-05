@@ -12,8 +12,8 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PengeluaranController;
 
 Route::get('/', function () {
-    return view('welcome');
-})->middleware('guest')->name('home');  
+    return view('admin.auth.login');
+})->middleware('guest')->name('home');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])
     ->middleware('guest')
@@ -26,13 +26,13 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
-    
+
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Laporan Laba Rugi
     Route::get('laba', [LabaController::class, 'index'])->name('laba.index');
-    
+
     // Ekspor Buku Besar
     Route::get('buku/export/pdf', [BukuController::class, 'exportPdf'])->name('buku.export.pdf');
     Route::get('buku/export/csv', [BukuController::class, 'exportCsv'])->name('buku.export.csv');
@@ -44,5 +44,4 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('kategori', KategoriController::class);
     Route::resource('kas', KasController::class);
     Route::resource('buku', BukuController::class);
-
 });

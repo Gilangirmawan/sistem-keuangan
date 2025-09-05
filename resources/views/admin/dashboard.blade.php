@@ -7,7 +7,7 @@
         <h2 class="text-lg font-semibold mb-4">Ringkasan Keuangan</h2>
         
         <!-- Saldo Card -->
-<div class="bg-gradient-to-r from-sky-400 to-sky-600 text-white rounded-xl p-4 mb-4 flex justify-between items-start">
+<div class="bg-gradient-to-r from-[#00a84f] to-[#00d66f] text-white rounded-xl p-4 mb-4 flex justify-between items-start">
     <div>
         <p class="text-sm opacity-80">Sisa Saldo Terkini</p>
         <p class="text-3xl font-bold">
@@ -31,7 +31,7 @@
     <div class="bg-white rounded-xl shadow p-5 flex-1">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-semibold">Transaksi Terbaru</h2>
-            <a href="{{ route('admin.transaksi.create') }}" class="bg-sky-500 text-white px-3 py-1 rounded hover:bg-sky-600 text-sm">
+            <a href="{{ route('admin.transaksi.create') }}" class="bg-black text-white px-3 py-1 rounded hover:bg-green-500 text-sm">
                 + Buat Transaksi
             </a>
         </div>

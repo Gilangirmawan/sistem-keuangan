@@ -21,7 +21,7 @@ class BukuController extends Controller
         // Hitung saldo awal dari halaman-halaman sebelumnya
         $offset = ($currentPage - 1) * $perPage;
         $transaksiSebelumnya = Transaksi::orderBy('created_at', 'asc')->take($offset)->get();
-        
+
         $saldoAwal = 0;
         foreach ($transaksiSebelumnya as $transaksi) {
             if ($transaksi->jenis_transaksi == 'pemasukan') {
@@ -40,7 +40,7 @@ class BukuController extends Controller
         $bukuBesar = $semuaTransaksi->map(function ($item) use (&$saldo) {
             $debit = ($item->jenis_transaksi == 'pemasukan') ? $item->jumlah : 0;
             $kredit = ($item->jenis_transaksi == 'pengeluaran') ? $item->jumlah : 0;
-            
+
             $saldo += $debit - $kredit;
 
             return (object) [
@@ -67,7 +67,7 @@ class BukuController extends Controller
         $bukuBesar = $semuaTransaksi->map(function ($item) use (&$saldo) {
             $debit = ($item->jenis_transaksi == 'pemasukan') ? $item->jumlah : 0;
             $kredit = ($item->jenis_transaksi == 'pengeluaran') ? $item->jumlah : 0;
-            
+
             $saldo += $debit - $kredit;
 
             return (object) [
@@ -80,11 +80,11 @@ class BukuController extends Controller
         });
 
         // Menggunakan Pdf facade yang sudah diimpor dengan benar
-        $pdf = Pdf::loadView('admin.buku.pdf', compact('bukuBesar'));
-        
+        $pdf = Pdf::loadView('admin\buku-pdf', compact('bukuBesar'));
+
         // Atur nama file PDF yang akan diunduh
         $namaFile = 'laporan-buku-besar-' . Carbon::now()->format('d-m-Y') . '.pdf';
-        
+
         return $pdf->stream($namaFile);
     }
 

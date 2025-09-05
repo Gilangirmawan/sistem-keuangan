@@ -1,4 +1,4 @@
-<nav class="bg-gradient-to-r fixed w-full z-10 from-sky-600 to-blue-500 text-white shadow-md py-5">
+<nav class="bg-gradient-to-r from-[#00a84f] to-[#00d66f] fixed w-full text-white shadow-md py-5">
     <div class="flex items-center justify-between px-4 py-3">
         
         <div class="flex items-center">
