@@ -1,4 +1,4 @@
-<nav class="bg-gradient-to-r from-[#00a84f] to-[#00d66f] fixed w-full text-white shadow-md py-5">
+<nav class="bg-gradient-to-r from-[#01c350] to-[#009588] fixed w-full text-white shadow-md py-5">
     <div class="flex items-center justify-between px-4 py-3">
         
         <div class="flex items-center">
@@ -17,7 +17,6 @@
                 <p class="font-semibold">{{ Auth::user()->name ?? 'Admin' }}</p>
                 <p class="text-xs text-gray-200">{{ Auth::user()->role ?? 'Administrator' }}</p>
             </div>
-            <img src="/images/user.jpg" alt="User" class="w-10 h-10 rounded-full border-2 border-white">
         </div>
     </div>
 </nav>
