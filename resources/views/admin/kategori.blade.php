@@ -48,9 +48,9 @@
                     <td class="px-6 py-4">{{ ucfirst($item->jenis) }}</td>
                     <td class="px-6 py-4 flex gap-2">
                         <button onclick="openEditModal({{ $item->id }}, '{{ $item->nama_kategori }}', '{{ $item->jenis }}')" 
-                                class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded">Edit</button>
+                                class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded"><i class="fa-solid fa-pencil"></i> Edit</button>
                         <button onclick="openDeleteModal({{ $item->id }})" 
-                                class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded">Hapus</button>
+                                class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded"><i class="fa-solid fa-trash"></i> Hapus</button>
                     </td>
                 </tr>
                 @endforeach
@@ -83,9 +83,9 @@
                     <td class="px-6 py-4">{{ ucfirst($item->jenis) }}</td>
                     <td class="px-6 py-4 flex gap-2">
                         <button onclick="openEditModal({{ $item->id }}, '{{ $item->nama_kategori }}', '{{ $item->jenis }}')" 
-                                class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded">Edit</button>
+                                class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded"><i class="fa-solid fa-pencil"></i> Edit</button>
                         <button onclick="openDeleteModal({{ $item->id }})" 
-                                class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded">Hapus</button>
+                                class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded"><i class="fa-solid fa-trash"></i> Hapus</button>
                     </td>
                 </tr>
                 @endforeach

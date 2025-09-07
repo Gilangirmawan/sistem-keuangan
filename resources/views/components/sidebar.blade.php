@@ -70,10 +70,10 @@
                     <i class="fa-solid fa-book w-5 text-center"></i> <span>Buku Besar</span>
                 </a>
 
-                <a href="{{ route('admin.kas.index')}}" 
+                {{-- <a href="{{ route('admin.kas.index')}}" 
                     class="flex items-center gap-3 px-4 py-2 rounded text-sm transition-colors duration-200 {{ request()->routeIs('admin.kas.*') ? 'bg-gray-800 text-white font-semibold border-l-4 border-[#01c350]' : 'text-gray-300 hover:bg-gray-800' }}">
                     <i class="fa-solid fa-book-open-reader w-5 text-center"></i> <span>Arus Kas</span>
-                </a>
+                </a> --}}
             </div>
         </div>
     </nav>
