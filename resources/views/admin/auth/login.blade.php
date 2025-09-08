@@ -98,7 +98,7 @@
 
                 <!-- Submit Button -->
                 <div class="flex justify-center ">
-                    <button type="submit" class="w-56 bg-black text-white py-2 rounded-2xl hover:bg-sky-800">Log In</button>
+                    <button type="submit" class="w-56 bg-black text-white py-2 rounded-2xl hover:bg-green-800">Log In</button>
                 </div>
             </form>
         </div>
