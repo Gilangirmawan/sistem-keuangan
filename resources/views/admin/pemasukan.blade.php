@@ -45,9 +45,9 @@
                     </td>
                     <td class="px-6 py-4">{{ $item->created_at->format('d-m-Y') }}</td>
                     <td class="px-6 py-4 flex gap-2">
-                        <button onclick="openEditModal({{ $item->id }}, '{{ $item->keterangan }}', '{{ $item->id_kategori }}', '{{ $item->jumlah }}', '{{ $item->total }}')" 
+                        <button onclick="openEditModal('{{ route('admin.pemasukan.update', $item->id) }}', '{{ $item->keterangan }}', '{{ $item->id_kategori }}', '{{ $item->jumlah }}', '{{ $item->total }}')" 
                                 class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded"><i class="fa-solid fa-pencil"></i> Edit</button>
-                        <button onclick="openDeleteModal({{ $item->id }})" 
+                        <button onclick="openDeleteModal('{{ route('admin.pemasukan.destroy', $item->id) }}')"
                                 class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded"><i class="fa-solid fa-trash"></i> Hapus</button>
                     </td>
                 </tr>
@@ -68,8 +68,8 @@
         </table>
 
         <div class="p-4 ">
-    {{ $pemasukan->links() }}
-</div>
+        {{ $pemasukan->links() }}
+        </div>
     </div>
 </div>
 
@@ -169,26 +169,22 @@
             </div>
         </form>
     </div>
-
-    <div class="mt-4">
-        {{ $pemasukan->appends(request()->query())->links() }}
-    </div>
 </div>
 
 <!-- Script -->
 <script>
-    function openEditModal(id, keterangan, idKategori, jumlah, total) {
+    function openEditModal(url, keterangan, idKategori, jumlah, total) {
         document.getElementById('modalEdit').classList.remove('hidden');
         document.getElementById('editKeterangan').value = keterangan;
         document.getElementById('editKategori').value = idKategori;
         document.getElementById('editJumlah').value = jumlah;
         document.getElementById('editTotal').value = total;
-        document.getElementById('formEdit').action = '/pemasukan/' + id;
+         document.getElementById('formEdit').action = url;
     }
 
-    function openDeleteModal(id) {
+    function openDeleteModal(url) {
         document.getElementById('modalDelete').classList.remove('hidden');
-        document.getElementById('formDelete').action = '/pemasukan/' + id;
+        document.getElementById('formDelete').action = url;
     }
 </script>
 @endsection

@@ -47,9 +47,9 @@
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $item->nama_kategori }}</td>
                     <td class="px-6 py-4">{{ ucfirst($item->jenis) }}</td>
                     <td class="px-6 py-4 flex gap-2">
-                        <button onclick="openEditModal({{ $item->id }}, '{{ $item->nama_kategori }}', '{{ $item->jenis }}')" 
+                        <button onclick="openEditModal('{{ route('admin.kategori.update', $item->id) }}', '{{ $item->nama_kategori }}', '{{ $item->jenis }}')" 
                                 class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded"><i class="fa-solid fa-pencil"></i> Edit</button>
-                        <button onclick="openDeleteModal({{ $item->id }})" 
+                        <button onclick="openDeleteModal('{{ route('admin.kategori.destroy', $item->id) }}')" 
                                 class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded"><i class="fa-solid fa-trash"></i> Hapus</button>
                     </td>
                 </tr>
@@ -82,9 +82,9 @@
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $item->nama_kategori }}</td>
                     <td class="px-6 py-4">{{ ucfirst($item->jenis) }}</td>
                     <td class="px-6 py-4 flex gap-2">
-                        <button onclick="openEditModal({{ $item->id }}, '{{ $item->nama_kategori }}', '{{ $item->jenis }}')" 
+                        <button onclick="openEditModal('{{ route('admin.kategori.update', $item->id) }}', '{{ $item->nama_kategori }}', '{{ $item->jenis }}')" 
                                 class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded"><i class="fa-solid fa-pencil"></i> Edit</button>
-                        <button onclick="openDeleteModal({{ $item->id }})" 
+                        <button onclick="openDeleteModal('{{ route('admin.kategori.destroy', $item->id) }}')" 
                                 class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded"><i class="fa-solid fa-trash"></i> Hapus</button>
                     </td>
                 </tr>
@@ -182,16 +182,16 @@
         event.target.classList.remove('text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300');
     }
 
-    function openEditModal(id, nama, jenis) {
-        document.getElementById('modalEdit').classList.remove('hidden');
-        document.getElementById('editNama').value = nama;
-        document.getElementById('editJenis').value = jenis;
-        document.getElementById('formEdit').action = '/kategori/' + id;
+    function openEditModal(url, nama, jenis) {
+    document.getElementById('modalEdit').classList.remove('hidden');
+    document.getElementById('editNama').value = nama;
+    document.getElementById('editJenis').value = jenis;
+    document.getElementById('formEdit').action = url;
     }
 
-    function openDeleteModal(id) {
-        document.getElementById('modalDelete').classList.remove('hidden');
-        document.getElementById('formDelete').action = '/kategori/' + id;
+    function openDeleteModal(url) {
+    document.getElementById('modalDelete').classList.remove('hidden');
+    document.getElementById('formDelete').action = url;
     }
 </script>
 @endsection
