@@ -1,197 +1,245 @@
 @extends('layouts.app')
 
+@section('title', 'Manajemen Kategori')
+
 @section('content')
-<div class="p-6">
-    <div class="flex justify-between items-center mb-4 mt-11">
-        <h2 class="text-lg font-semibold">Manajemen Kategori</h2>
-        <button onclick="document.getElementById('modalTambah').classList.remove('hidden')" 
-                class="bg-black hover:bg-green-500 text-white px-4 py-2 rounded-lg shadow">
-            + Tambah Data Kategori
+{{-- 
+    PENYEMPURNAAN:
+    - Menambahkan watcher untuk mengunci scroll body saat modal aktif.
+--}}
+<div x-data="{
+    isModalTambahOpen: false,
+    isModalEditOpen: false,
+    isModalDeleteOpen: false,
+    editUrl: '',
+    deleteUrl: '',
+    editData: {},
+    init() {
+        this.$watch('isModalTambahOpen || isModalEditOpen || isModalDeleteOpen', value => {
+            if (value) {
+                document.body.classList.add('overflow-hidden');
+            } else {
+                document.body.classList.remove('overflow-hidden');
+            }
+        });
+    }
+}" class="p-4 md:p-6 mt-14">
+
+    <!-- Header Halaman -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+        <div>
+            <h2 class="text-2xl font-bold text-gray-800">Manajemen Kategori</h2>
+            <p class="text-gray-500">Kelola kategori untuk pemasukan dan pengeluaran.</p>
+        </div>
+        <button @click="isModalTambahOpen = true"
+            class="w-full md:w-auto mt-4 md:mt-0 bg-[#01c350] hover:bg-[#00ad75] text-white font-bold px-4 py-2 rounded-lg shadow-md transition-colors duration-200 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-plus"></i>
+            <span>Tambah Kategori</span>
         </button>
     </div>
+    
+    <!-- Pesan Notifikasi Sukses -->
+    @if (session('success'))
+        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
+             x-transition
+             class="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 mb-6 rounded-md shadow-sm" role="alert">
+            <p class="font-semibold">{{ session('success') }}</p>
+        </div>
+    @endif
 
-    <!-- Tabs -->
-    <div class="mb-4 border-b border-gray-200">
-        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="kategoriTabs" role="tablist">
-            <li class="me-2">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg active text-blue-600 border-blue-600" 
-                        onclick="showTab('pemasukan')">
-                    Pemasukan
-                </button>
-            </li>
-            <li class="me-2">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg text-gray-500 hover:text-gray-600 hover:border-gray-300" 
-                        onclick="showTab('pengeluaran')">
-                    Pengeluaran
-                </button>
-            </li>
-        </ul>
+    <!-- Konten Utama: Card dengan Tabs dan Tabel -->
+    <div class="bg-white rounded-xl shadow-md">
+        <!-- Tabs -->
+        <div class="border-b border-gray-200">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="kategoriTabs" role="tablist">
+                <li class="flex-1 md:flex-initial me-2">
+                    <button class="w-full inline-block p-4 border-b-2 rounded-t-lg text-green-600 border-green-600" 
+                            onclick="showTab(event, 'pemasukan')">
+                        Pemasukan
+                    </button>
+                </li>
+                <li class="flex-1 md:flex-initial me-2">
+                    <button class="w-full inline-block p-4 border-b-2 rounded-t-lg text-gray-500 hover:text-gray-600 hover:border-gray-300" 
+                            onclick="showTab(event, 'pengeluaran')">
+                        Pengeluaran
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Kontainer Tabel -->
+        <div class="p-0 md:p-4">
+            <!-- Tabel Pemasukan -->
+            <div id="tab-pemasukan" class="relative overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 hidden md:table-header-group">
+                        <tr>
+                            <th class="px-6 py-3">Nama Kategori</th>
+                            <th class="px-6 py-3">Jenis</th>
+                            <th class="px-6 py-3 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="space-y-4 md:space-y-0">
+                        @forelse($kategori->where('jenis', 'pemasukan') as $item)
+                            <tr class="block md:table-row bg-white border shadow-md md:shadow-none md:border-b rounded-lg md:rounded-none">
+                                <td class="block md:table-cell px-6 py-4 text-right md:text-left border-b md:border-none font-medium text-gray-900">
+                                    <span class="float-left font-bold md:hidden">Kategori</span> {{ $item->nama_kategori }}
+                                </td>
+                                <td class="block md:table-cell px-6 py-4 text-right md:text-left border-b md:border-none">
+                                     <span class="float-left font-bold md:hidden">Jenis</span>
+                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        {{ ucfirst($item->jenis) }}
+                                    </span>
+                                </td>
+                                <td class="block md:table-cell px-6 py-4">
+                                    <div class="flex justify-end md:justify-center gap-4">
+                                        <button @click="isModalEditOpen = true; editUrl = '{{ route('admin.kategori.update', $item->id) }}'; editData = { nama: '{{ $item->nama_kategori }}', jenis: '{{ $item->jenis }}' };" class="text-yellow-500 hover:text-yellow-700" title="Edit">
+                                            <i class="fa-solid fa-pencil fa-lg"></i>
+                                        </button>
+                                        <button @click="isModalDeleteOpen = true; deleteUrl = '{{ route('admin.kategori.destroy', $item->id) }}';" class="text-red-500 hover:text-red-700" title="Hapus">
+                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr><td colspan="3" class="text-center py-10 text-gray-500">Belum ada data kategori pemasukan.</td></tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            <!-- Tabel Pengeluaran -->
+            <div id="tab-pengeluaran" class="relative overflow-x-auto hidden">
+                 <table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 hidden md:table-header-group">
+                        <tr>
+                            <th class="px-6 py-3">Nama Kategori</th>
+                            <th class="px-6 py-3">Jenis</th>
+                            <th class="px-6 py-3 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="space-y-4 md:space-y-0">
+                        @forelse($kategori->where('jenis', 'pengeluaran') as $item)
+                            <tr class="block md:table-row bg-white border shadow-md md:shadow-none md:border-b rounded-lg md:rounded-none">
+                                <td class="block md:table-cell px-6 py-4 text-right md:text-left border-b md:border-none font-medium text-gray-900">
+                                    <span class="float-left font-bold md:hidden">Kategori</span> {{ $item->nama_kategori }}
+                                </td>
+                                <td class="block md:table-cell px-6 py-4 text-right md:text-left border-b md:border-none">
+                                     <span class="float-left font-bold md:hidden">Jenis</span>
+                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        {{ ucfirst($item->jenis) }}
+                                    </span>
+                                </td>
+                                <td class="block md:table-cell px-6 py-4">
+                                    <div class="flex justify-end md:justify-center gap-4">
+                                        <button @click="isModalEditOpen = true; editUrl = '{{ route('admin.kategori.update', $item->id) }}'; editData = { nama: '{{ $item->nama_kategori }}', jenis: '{{ $item->jenis }}' };" class="text-yellow-500 hover:text-yellow-700" title="Edit">
+                                            <i class="fa-solid fa-pencil fa-lg"></i>
+                                        </button>
+                                        <button @click="isModalDeleteOpen = true; deleteUrl = '{{ route('admin.kategori.destroy', $item->id) }}';" class="text-red-500 hover:text-red-700" title="Hapus">
+                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr><td colspan="3" class="text-center py-10 text-gray-500">Belum ada data kategori pengeluaran.</td></tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-    <!-- Table Pemasukan -->
-    <div id="tab-pemasukan" class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                <tr>
-                    <th class="px-6 py-3">No</th>
-                    <th class="px-6 py-3">Nama Kategori</th>
-                    <th class="px-6 py-3">Jenis</th>
-                    <th class="px-6 py-3">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php $no = 1; @endphp
-                @foreach($kategori->where('jenis', 'pemasukan') as $item)
-                <tr class="odd:bg-white even:bg-gray-50 border-b">
-                    <td class="px-6 py-4">{{ $no++ }}</td>
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $item->nama_kategori }}</td>
-                    <td class="px-6 py-4">{{ ucfirst($item->jenis) }}</td>
-                    <td class="px-6 py-4 flex gap-2">
-                        <button onclick="openEditModal('{{ route('admin.kategori.update', $item->id) }}', '{{ $item->nama_kategori }}', '{{ $item->jenis }}')" 
-                                class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded"><i class="fa-solid fa-pencil"></i> Edit</button>
-                        <button onclick="openDeleteModal('{{ route('admin.kategori.destroy', $item->id) }}')" 
-                                class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded"><i class="fa-solid fa-trash"></i> Hapus</button>
-                    </td>
-                </tr>
-                @endforeach
-                @if($kategori->where('jenis', 'pemasukan')->isEmpty())
-                <tr>
-                    <td colspan="4" class="text-center py-3">Belum ada data kategori pemasukan.</td>
-                </tr>
-                @endif
-            </tbody>
-        </table>
+    <!-- Modal Tambah -->
+    <div x-show="isModalTambahOpen" @keydown.escape.window="isModalTambahOpen = false" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display: none;">
+        <div x-show="isModalTambahOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-900 bg-opacity-50"></div>
+        <div @click.away="isModalTambahOpen = false" x-show="isModalTambahOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="relative bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Tambah Kategori Baru</h3>
+                <form action="{{ route('admin.kategori.store') }}" method="POST" class="space-y-4">
+                    @csrf
+                    <div>
+                        <label for="nama_kategori" class="block text-sm font-medium text-gray-700">Nama Kategori</label>
+                        <input type="text" name="nama_kategori" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+                    <div>
+                        <label for="jenis" class="block text-sm font-medium text-gray-700">Jenis</label>
+                        <select name="jenis" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                            <option value="pemasukan">Pemasukan</option>
+                            <option value="pengeluaran">Pengeluaran</option>
+                        </select>
+                    </div>
+                    <div class="pt-4 flex justify-end gap-3">
+                        <button type="button" @click="isModalTambahOpen = false" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200">Batal</button>
+                        <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-sky-500 rounded-md hover:bg-sky-600">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <!-- Table Pengeluaran -->
-    <div id="tab-pengeluaran" class="relative overflow-x-auto shadow-md sm:rounded-lg hidden">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                <tr>
-                    <th class="px-6 py-3">No</th>
-                    <th class="px-6 py-3">Nama Kategori</th>
-                    <th class="px-6 py-3">Jenis</th>
-                    <th class="px-6 py-3">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php $no = 1; @endphp
-                @foreach($kategori->where('jenis', 'pengeluaran') as $item)
-                <tr class="odd:bg-white even:bg-gray-50 border-b">
-                    <td class="px-6 py-4">{{ $no++ }}</td>
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $item->nama_kategori }}</td>
-                    <td class="px-6 py-4">{{ ucfirst($item->jenis) }}</td>
-                    <td class="px-6 py-4 flex gap-2">
-                        <button onclick="openEditModal('{{ route('admin.kategori.update', $item->id) }}', '{{ $item->nama_kategori }}', '{{ $item->jenis }}')" 
-                                class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded"><i class="fa-solid fa-pencil"></i> Edit</button>
-                        <button onclick="openDeleteModal('{{ route('admin.kategori.destroy', $item->id) }}')" 
-                                class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded"><i class="fa-solid fa-trash"></i> Hapus</button>
-                    </td>
-                </tr>
-                @endforeach
-                @if($kategori->where('jenis', 'pengeluaran')->isEmpty())
-                <tr>
-                    <td colspan="4" class="text-center py-3">Belum ada data kategori pengeluaran.</td>
-                </tr>
-                @endif
-            </tbody>
-        </table>
+    <!-- Modal Edit -->
+    <div x-show="isModalEditOpen" @keydown.escape.window="isModalEditOpen = false" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display: none;">
+        <div x-show="isModalEditOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-900 bg-opacity-50"></div>
+        <div @click.away="isModalEditOpen = false" x-show="isModalEditOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="relative bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Edit Kategori</h3>
+                <form :action="editUrl" method="POST" class="space-y-4">
+                    @csrf
+                    @method('PUT')
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Nama Kategori</label>
+                        <input type="text" name="nama_kategori" x-model="editData.nama" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Jenis</label>
+                        <select name="jenis" x-model="editData.jenis" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                            <option value="pemasukan">Pemasukan</option>
+                            <option value="pengeluaran">Pengeluaran</option>
+                        </select>
+                    </div>
+                    <div class="pt-4 flex justify-end gap-3">
+                        <button type="button" @click="isModalEditOpen = false" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200">Batal</button>
+                        <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Hapus -->
+    <div x-show="isModalDeleteOpen" @keydown.escape.window="isModalDeleteOpen = false" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display: none;">
+        <div x-show="isModalDeleteOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-900 bg-opacity-50"></div>
+        <div @click.away="isModalDeleteOpen = false" x-show="isModalDeleteOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="relative bg-white rounded-lg shadow-xl w-full max-w-md text-center p-6">
+             <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+                <i class="fa-solid fa-triangle-exclamation text-red-600"></i>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mt-5">Hapus Kategori</h3>
+            <p class="text-sm text-gray-500 mt-2">Apakah Anda yakin ingin menghapus kategori ini? Tindakan ini tidak dapat dibatalkan.</p>
+            <form :action="deleteUrl" method="POST" class="mt-6 flex justify-center gap-3">
+                @csrf
+                @method('DELETE')
+                <button type="button" @click="isModalDeleteOpen = false" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 w-full">Batal</button>
+                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 w-full">Hapus</button>
+            </form>
+        </div>
     </div>
 </div>
-
-<!-- Modal Tambah -->
-<div id="modalTambah" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
-    <div class="bg-white p-6 rounded-lg w-1/3 shadow-lg">
-        <h3 class="text-lg font-semibold mb-4">Tambah Data Kategori</h3>
-        <form action="{{ route('admin.kategori.store') }}" method="POST">
-            @csrf
-            <div class="mb-3">
-                <label class="block">Nama Kategori</label>
-                <input type="text" name="nama_kategori" class="w-full border rounded px-3 py-2" required>
-            </div>
-            <div class="mb-3">
-                <label class="block">Jenis</label>
-                <select name="jenis" class="w-full border rounded px-3 py-2">
-                    <option value="pemasukan">Pemasukan</option>
-                    <option value="pengeluaran">Pengeluaran</option>
-                </select>
-            </div>
-            <div class="flex justify-end gap-2">
-                <button type="button" onclick="document.getElementById('modalTambah').classList.add('hidden')" class="px-4 py-2 bg-gray-400 rounded">Batal</button>
-                <button type="submit" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded">Simpan</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Modal Edit -->
-<div id="modalEdit" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
-    <div class="bg-white p-6 rounded-lg w-1/3 shadow-lg">
-        <h3 class="text-lg font-semibold mb-4">Edit Data Kategori</h3>
-        <form id="formEdit" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="mb-3">
-                <label class="block">Nama Kategori</label>
-                <input type="text" id="editNama" name="nama_kategori" class="w-full border rounded px-3 py-2" required>
-            </div>
-            <div class="mb-3">
-                <label class="block">Jenis</label>
-                <select id="editJenis" name="jenis" class="w-full border rounded px-3 py-2">
-                    <option value="pemasukan">Pemasukan</option>
-                    <option value="pengeluaran">Pengeluaran</option>
-                </select>
-            </div>
-            <div class="flex justify-end gap-2">
-                <button type="button" onclick="document.getElementById('modalEdit').classList.add('hidden')" class="px-4 py-2 bg-gray-400 rounded">Batal</button>
-                <button type="submit" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded">Update</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Modal Hapus -->
-<div id="modalDelete" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
-    <div class="bg-white p-6 rounded-lg w-1/3 shadow-lg">
-        <h3 class="text-lg font-semibold mb-4">Konfirmasi Hapus</h3>
-        <p class="mb-4">Apakah anda yakin ingin menghapus kategori ini?</p>
-        <form id="formDelete" method="POST">
-            @csrf
-            @method('DELETE')
-            <div class="flex justify-end gap-2">
-                <button type="button" onclick="document.getElementById('modalDelete').classList.add('hidden')" class="px-4 py-2 bg-gray-400 rounded">Batal</button>
-                <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded">Hapus</button>
-            </div>
-        </form>
-    </div>
-</div>
-
 
 <script>
-    function showTab(tab) {
+    function showTab(event, tab) {
         document.getElementById('tab-pemasukan').classList.add('hidden');
         document.getElementById('tab-pengeluaran').classList.add('hidden');
         document.getElementById('tab-' + tab).classList.remove('hidden');
 
         let buttons = document.querySelectorAll('#kategoriTabs button');
         buttons.forEach(btn => {
-            btn.classList.remove('text-blue-600', 'border-blue-600', 'active');
+            btn.classList.remove('text-green-600', 'border-green-600');
             btn.classList.add('text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300');
         });
-        event.target.classList.add('text-blue-600', 'border-blue-600', 'active');
-        event.target.classList.remove('text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300');
-    }
-
-    function openEditModal(url, nama, jenis) {
-    document.getElementById('modalEdit').classList.remove('hidden');
-    document.getElementById('editNama').value = nama;
-    document.getElementById('editJenis').value = jenis;
-    document.getElementById('formEdit').action = url;
-    }
-
-    function openDeleteModal(url) {
-    document.getElementById('modalDelete').classList.remove('hidden');
-    document.getElementById('formDelete').action = url;
+        event.currentTarget.classList.add('text-green-600', 'border-green-600');
+        event.currentTarget.classList.remove('text-gray-500');
     }
 </script>
 @endsection
+

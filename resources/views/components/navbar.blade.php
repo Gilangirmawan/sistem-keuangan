@@ -1,4 +1,4 @@
-<nav class="bg-gradient-to-r from-[#01c350] to-[#009588] fixed w-full text-white shadow-md py-5">
+<nav class="bg-gradient-to-r from-[#01c350] to-[#009588] fixed w-full text-white py-2 md:py-5 shadow-md z-40">
     <div class="flex items-center justify-between px-4 py-3">
         
         <div class="flex items-center">
@@ -13,8 +13,11 @@
         </div>
 
         <div class="flex items-center space-x-3 fixed right-4 ">
-            <div class="text-right hidden sm:block">
+            <!-- Kelas `hidden sm:block` DIHAPUS dari div ini -->
+            <div class="text-right">
+                <!-- Nama pengguna sekarang selalu terlihat -->
                 <p class="font-semibold">{{ Auth::user()->name ?? 'Admin' }}</p>
+                <!-- Role akan disembunyikan di mobile (layar di bawah sm) -->
                 <p class="text-xs text-gray-200">{{ Auth::user()->role ?? 'Administrator' }}</p>
             </div>
         </div>
