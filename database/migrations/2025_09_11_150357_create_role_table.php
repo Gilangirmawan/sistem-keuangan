@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('transaksi', function (Blueprint $table) {
-            $table->decimal('total', 15, 2)->after('jumlah');
-            $table->string('bukti_transaksi')->nullable()->after('total');
+        Schema::create('role', function (Blueprint $table) {
+            $table->id();
+            $table->string('role');
         });
     }
 
@@ -22,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('transaksi', function (Blueprint $table) {
-            $table->dropColumn(['total', 'bukti_transaksi']);
-        });
+        Schema::dropIfExists('role');
     }
 };

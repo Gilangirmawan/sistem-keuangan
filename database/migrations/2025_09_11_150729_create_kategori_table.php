@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('kategori', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_kategori', 100)->unique();
+
+            // Kolom nama kategori, harus unik
+            $table->string('nama_kategori');
+            
+            // Kolom jenis kategori, hanya bisa diisi 'pemasukan' atau 'pengeluaran'
             $table->enum('jenis', ['pemasukan', 'pengeluaran']);
+            
             $table->timestamps();
         });
     }
