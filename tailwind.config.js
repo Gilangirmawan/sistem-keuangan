@@ -5,6 +5,11 @@ export default {
     "./resources/**/*.js",
     "./resources/**/*.vue",
   ],
-  theme: { extend: {} },
+  theme: { extend: {
+    fontFamily: {
+                // Jadikan Poppins sebagai font sans-serif utama
+                sans: ['Poppins'],
+            },
+  } },
   plugins: [],
 }

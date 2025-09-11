@@ -52,7 +52,7 @@
                     class="flex items-center justify-between gap-3 px-4 py-2 rounded w-full text-left transition-colors duration-200 {{ request()->routeIs(['admin.laba.*', 'admin.buku.*', 'admin.kas.*']) ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-800' }}">
                 <span class="flex items-center gap-3">
                     <i class="fa-solid fa-folder-closed w-5 text-center"></i>
-                    <span>Laporan Keuangan</span>
+                    <span>Laporan</span>
                 </span>
                 <svg :class="{ 'rotate-180': open }" class="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>

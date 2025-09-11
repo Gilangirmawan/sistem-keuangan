@@ -8,7 +8,7 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100 font-poppins">
 
     <div x-data="{ sidebarOpen: false }" class="relative min-h-screen md:flex">
 
