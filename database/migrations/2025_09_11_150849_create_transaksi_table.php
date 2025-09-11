@@ -16,8 +16,7 @@ return new class extends Migration
             $table->enum('jenis_transaksi', ['pemasukan', 'pengeluaran']);
             $table->foreignId('id_kategori')->constrained('kategori')->onDelete('cascade');
             $table->decimal('jumlah', 15, 2)->default(0);
-            $table->decimal('total', 15, 2); 
-            $table->bigInteger('total_laba');
+            $table->decimal('total', 15, 2);
             $table->enum('status', ['profit', 'loss'])->nullable();
             $table->string('bukti_transaksi')->nullable();
             $table->string('keterangan')->nullable();
