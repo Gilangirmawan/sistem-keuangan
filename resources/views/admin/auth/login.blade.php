@@ -88,12 +88,12 @@
 
                 <!-- Remember Me -->
                 <div class="flex items-center justify-between mb-6">
-                    <label class="flex items-center space-x-2 text-slate-600">
+                    {{-- <label class="flex items-center space-x-2 text-slate-600"> --}}
                         {{-- Menambahkan 'name' untuk checkbox 'remember' --}}
-                        <input type="checkbox" name="remember" class="form-checkbox">
+                        {{-- <input type="checkbox" name="remember" class="form-checkbox">
                         <span>Remember Me</span>
                     </label>
-                    <a href="#" class="text-sm text-sky-700 hover:underline">Forgot Password?</a>
+                    <a href="#" class="text-sm text-sky-700 hover:underline">Forgot Password?</a> --}}
                 </div>
 
                 <!-- Submit Button -->
