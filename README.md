@@ -23,7 +23,7 @@ Selamat datang di repositori Proyek Sistem Keuangan. Aplikasi ini dikembangkan s
 
   - **Backend:** Laravel 11
   - **Frontend:** Tailwind CSS & Alpine.js
-  - **Database:** MySQL / MariaDB
+  - **Database:** MySQL 
   - **Lainnya:**
       - `barryvdh/laravel-dompdf`: Untuk fungsionalitas pembuatan laporan PDF.
 
@@ -43,8 +43,8 @@ Ikuti langkah-langkah di bawah ini untuk menjalankan proyek ini di lingkungan lo
 1.  **Clone repositori ini:**
 
     ```bash
-    git clone https://github.com/nama-user-anda/nama-repo-anda.git
-    cd nama-repo-anda
+    git clone https://github.com/Gilangirmawan/sistem-keuangan.git
+    cd sistem-keuangan
     ```
 
 2.  **Install dependensi Composer:**
@@ -119,8 +119,8 @@ Aplikasi Anda sekarang berjalan di `http://127.0.0.1:8000`.
 
 Setelah menjalankan `db:seed`, Anda bisa login menggunakan akun demo berikut:
 
-  - **Email:** `admin@example.com`
-  - **Password:** `password`
+  - **Email:** `admin@gmail.com`
+  - **Password:** `admin123`
 
 ## 🙏 Ucapan Terima Kasih
 
