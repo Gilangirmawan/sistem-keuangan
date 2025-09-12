@@ -26,6 +26,7 @@ Selamat datang di repositori Proyek Sistem Keuangan. Aplikasi ini dikembangkan s
   - **Database:** MySQL 
   - **Lainnya:**
       - `barryvdh/laravel-dompdf`: Untuk fungsionalitas pembuatan laporan PDF.
+      - `maatwebsite/excel`: Untuk fungsionalitas pembuatan laporan Excel.
 
 ## 🚀 Panduan Instalasi & Setup
 
