@@ -12,7 +12,7 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PengeluaranController;
 
 Route::get('/', function () {
-    return view('admin.auth.login');
+    return view('main');
 })->middleware('guest')->name('home');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])
