@@ -69,7 +69,7 @@
                         </span>
                         {{-- Menambahkan 'name' dan 'value' untuk input email --}}
                         <input type="email" name="email" value="{{ old('email') }}" placeholder="Enter your email" 
-                            class="w-full pl-10 pr-4 py-2 border rounded-2xl focus:outline-none focus:ring-2 focus:ring-sky-500">
+                            class="w-full pl-10 pr-4 py-2 border rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-500">
                     </div>
                     {{-- Menampilkan pesan error validasi untuk email --}}
                     @error('email')
@@ -86,7 +86,7 @@
                         </span>
                         {{-- Menambahkan 'name' untuk input password --}}
                         <input type="password" id="password" name="password" placeholder="Enter your password" 
-                            class="w-full pl-10 pr-10 py-2 border rounded-2xl focus:outline-none focus:ring-2 focus:ring-sky-500">
+                            class="w-full pl-10 pr-10 py-2 border rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-500">
                         <button type="button" onclick="togglePassword()" 
                             class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-500 hover:text-slate-700">
                             <i id="toggleIcon" data-feather="eye"></i>
