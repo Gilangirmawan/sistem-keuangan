@@ -8,7 +8,6 @@ Selamat datang di repositori Proyek Sistem Keuangan. Aplikasi ini dikembangkan s
 
 *(Sangat disarankan untuk menambahkan screenshot atau GIF singkat dari aplikasi Anda di sini untuk membuatnya lebih menarik. Ganti `link-ke-gambar-anda.gif` dengan URL gambar Anda)*
 
-*Contoh tampilan Dashboard Utama*
 
 ## ✨ Fitur Utama
 
@@ -112,6 +111,11 @@ Ikuti langkah-langkah di bawah ini untuk menjalankan proyek ini di lingkungan lo
 
     ```bash
     php artisan serve
+    ```
+11. **Install meatwebsite**
+
+    ```bash
+    composer require maatwebsite/excel
     ```
 
 Aplikasi Anda sekarang berjalan di `http://127.0.0.1:8000`.
