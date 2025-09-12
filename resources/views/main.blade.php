@@ -20,12 +20,21 @@
                 Masuk ke Dashboard
             </a> 
         </div>
-        <div class="hidden lg:mt-0 lg:col-span-5 lg:flex items-center justify-center">
-            {{-- Visual Vektor Baru --}}
-            <img src="https://images.undraw.com/undraw_data_reports_706v.svg" alt="Financial System Vector" class="w-full h-auto">
-        </div>                
+        <div class="hidden lg:mt-0 lg:col-span-5 lg:flex flex-col items-center justify-center p-4">
+            {{-- Mockup Laptop --}}
+            <div class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[8px] rounded-t-xl h-[158px] max-w-[301px] md:h-[257px] md:max-w-[512px]">
+                <div class="rounded-lg overflow-hidden h-[142px] md:h-[241px] bg-white dark:bg-gray-800">
+                    {{-- Gambar untuk mode terang --}}
+                    <img src="{{ asset('img/mockup-laptop.png') }}" class="dark:hidden h-[142px] md:h-[241px] w-full rounded-lg" alt="Dashboard Screenshot">
+                    {{-- Gambar untuk mode gelap (placeholder) --}}
+                    <img src="https://flowbite.s3.amazonaws.com/docs/device-mockups/laptop-screen-dark.png" class="hidden dark:block h-[142px] md:h-[241px] w-full rounded-lg" alt="Dashboard Screenshot Dark Mode">
+                </div>
+            </div>
+            <div class="relative mx-auto bg-gray-900 dark:bg-gray-700 rounded-b-xl rounded-t-sm h-[17px] max-w-[351px] md:h-[21px] md:max-w-[597px]">
+                <div class="absolute left-1/2 top-0 -translate-x-1/2 rounded-b-xl w-[56px] h-[5px] md:w-[96px] md:h-[8px] bg-gray-800"></div>
+            </div>
+        </div>                 
     </div>
 </section>
-
 
 @endsection
