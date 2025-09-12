@@ -13,8 +13,8 @@ class DashboardController extends Controller
     public function index()
     {
         // 1. Menghitung Sisa Saldo Terkini
-        $totalPemasukan = Transaksi::where('jenis_transaksi', 'pemasukan')->sum('jumlah');
-        $totalPengeluaran = Transaksi::where('jenis_transaksi', 'pengeluaran')->sum('jumlah');
+        $totalPemasukan = Transaksi::where('jenis_transaksi', 'pemasukan')->sum('total');
+        $totalPengeluaran = Transaksi::where('jenis_transaksi', 'pengeluaran')->sum('total');
         $sisaSaldo = $totalPemasukan - $totalPengeluaran;
 
         // 2. Mengambil data untuk Grafik (Income vs Expense per Bulan)

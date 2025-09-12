@@ -57,7 +57,7 @@
                                     </span>
                                 </td>
                                 <td class="py-3 text-right font-semibold text-gray-800">
-                                    Rp {{ number_format($transaksi->jumlah, 0, ',', '.') }}
+                                    Rp {{ number_format($transaksi->total, 0, ',', '.') }}
                                 </td>
                             </tr>
                         @empty
