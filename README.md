@@ -4,11 +4,6 @@ Selamat datang di repositori Proyek Sistem Keuangan. Aplikasi ini dikembangkan s
 
 -----
 
-## 📸 Pratinjau Aplikasi
-
-*(Sangat disarankan untuk menambahkan screenshot atau GIF singkat dari aplikasi Anda di sini untuk membuatnya lebih menarik. Ganti `link-ke-gambar-anda.gif` dengan URL gambar Anda)*
-
-
 ## ✨ Fitur Utama
 
   - **Dashboard Analitik:** Visualisasi ringkasan keuangan, termasuk total pemasukan, pengeluaran, dan saldo akhir dalam bentuk grafik yang interaktif.
