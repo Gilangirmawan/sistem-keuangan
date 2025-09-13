@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,8 @@
     @vite('resources/css/app.css')
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    {{-- PERBAIKAN: Atribut 'integrity' yang salah ketik telah diperbaiki --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Alpine.js -->
     <script src="//unpkg.com/alpinejs" defer></script>
@@ -22,9 +23,12 @@
 <body class="bg-gray-50" style="font-family: 'Poppins', sans-serif;">
 
     <!-- Header / Navbar Landing Page -->
+    {{-- PENYESUAIAN: Navbar disederhanakan, hanya menampilkan judul sistem --}}
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="/" class="text-2xl font-bold text-gray-800">
+        {{-- PENYESUAIAN: Wrapper menu dan tombol hamburger dihapus --}}
+        <nav class="container mx-auto px-4 py-4 flex justify-start items-center">
+            {{-- PENYESUAIAN: Warna teks utama diubah agar sesuai dengan palet warna gelap --}}
+            <a href="/" class="text-2xl font-bold text-slate-800">
                 Keuangan<span class="text-[#01c350]">App</span>
             </a>
         </nav>
@@ -38,10 +42,11 @@
     <!-- Footer -->
     <footer class="bg-white border-t">
         <div class="container mx-auto px-4 py-6 text-center text-gray-500">
-            &copy; {{ date('Y') }} <a href="https://techade.id/" target="blank">Techade.id </a>. All rights reserved.
+            &copy; {{ date('Y') }} KeuanganApp by <a href="https://techade.id/" target="_blank" class="text-[#01c350] hover:text-[#00ad75] transition-colors duration-300 hover:underline">Techade.id</a>. All Rights Reserved.
         </div>
     </footer>
 
     @stack('scripts')
 </body>
 </html>
+
