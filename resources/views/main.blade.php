@@ -6,24 +6,22 @@
 
 {{-- Section 1: Jumbotron --}}
 <section class="bg-white">
-    <div class="py-16 px-4 mx-auto max-w-screen-xl text-center lg:py-24">
-        {{-- PENYESUAIAN WARNA: Warna heading diubah menjadi hitam pekat --}}
-        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl">
-            Kelola Keuangan Bisnis, Tanpa Ribet.
-        </h1>
-        {{-- PENYESUAIAN WARNA: Warna teks diubah menjadi hitam pekat --}}
-        <p class="mb-8 text-lg font-normal text-gray-900 lg:text-xl sm:px-16 lg:px-48">
-            Dari pencatatan transaksi hingga laporan laba rugi otomatis. Fokus pada bisnis Anda, biarkan kami yang urus angkanya.
-        </p>
-        <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-            <a href="{{ route('login') }}" class="inline-flex justify-center items-center py-3 px-6 text-base font-bold text-center text-white rounded-lg bg-[#01c350] hover:bg-[#009588] focus:ring-4 focus:ring-[#01c350]/50 transition-all duration-300 transform hover:scale-105">
+    <div class="grid max-w-screen-xl px-4 py-4 mx-auto lg:gap-8 xl:gap-0 lg:py-8 lg:grid-cols-12">
+        <div class="mr-auto place-self-center lg:col-span-7">
+            <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-gray-900">
+                Kelola Keuangan Bisnis, Tanpa Ribet.
+            </h1>
+            <p class="max-w-2xl mb-6 font-light text-gray-900 lg:mb-8 md:text-lg lg:text-xl">
+                Dari pencatatan transaksi hingga laporan laba rugi otomatis. Fokus pada bisnis Anda, biarkan kami yang urus angkanya.
+            </p>
+            <a href="{{ route('login') }}" class="inline-flex items-center justify-center px-5 py-3 text-base font-bold text-center text-white rounded-lg bg-[#01c350] hover:bg-[#009588] focus:ring-4 focus:ring-[#01c350]/50 transition-colors">
                 Masuk ke Dashboard
-                <i class="fa-solid fa-arrow-right ml-2"></i>
+                <i class="fa-solid fa-arrow-right w-5 h-5 ml-2 -mr-1"></i>
             </a>
         </div>
-        <div class="mt-12">
-            <img src="https://placehold.co/900x500/01c350/FFFFFF?text=Dashboard+Preview" class="rounded-lg shadow-2xl mx-auto" alt="Sistem Keuangan Dashboard Preview">
-        </div>
+        <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+            <img src="{{ asset('img/hero.png') }}" alt="Ilustrasi Keuangan">
+        </div>                
     </div>
 </section>
 
