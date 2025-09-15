@@ -24,7 +24,7 @@
 
     <!-- Header / Navbar Landing Page -->
     {{-- PENYESUAIAN: Navbar disederhanakan, hanya menampilkan judul sistem --}}
-    <header class="bg-white shadow-sm sticky top-0 z-50">
+    <header class="bg-white shadow-md sticky top-0 z-50">
         {{-- PENYESUAIAN: Wrapper menu dan tombol hamburger dihapus --}}
         <nav class="container mx-auto px-4 py-4 flex justify-start items-center">
             {{-- PENYESUAIAN: Warna teks utama diubah agar sesuai dengan palet warna gelap --}}
@@ -47,6 +47,9 @@
     </footer>
 
     @stack('scripts')
+    <!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
 </body>
 </html>
 
