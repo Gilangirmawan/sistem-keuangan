@@ -5,7 +5,7 @@
 @section('content')
 
 {{-- ================= Section 1: Hero ================= --}}
-<section class="relative overflow-hidden bg-gradient-to-br from-white via-gray-50 to-green-50" aria-labelledby="hero-heading">
+<section class="relative overflow-hidden bg-gray-50" aria-labelledby="hero-heading">
     <div class="grid max-w-screen-xl px-6 pt-12 pb-24 mx-auto lg:gap-8 xl:gap-0 lg:grid-cols-12">
         
         <!-- Left Content (hero uses CSS transitions, NOT AOS) -->
@@ -46,7 +46,7 @@
 </section>
 
 {{-- ================= Section 2: Fitur (AOS on-scroll) ================= --}}
-<section id="fitur" class="relative overflow-hidden py-20 bg-gradient-to-b from-[#01c350] to-[#009588]">
+<section id="fitur" class="relative overflow-hidden py-32 bg-gradient-to-b from-[#01c350] to-[#009588]">
     
     <!-- Brush Top Separator -->
     <div class="absolute top-0 left-0 w-full overflow-hidden leading-[0] -translate-y-[1px]">
@@ -57,9 +57,9 @@
         </svg>
     </div>
 
-    <!-- background accents -->
+    {{-- <!-- background accents -->
     <div class="absolute -top-10 -left-10 w-80 h-80 bg-white/10 rounded-full blur-3xl opacity-30"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl opacity-30"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl opacity-30"></div> --}}
 
     <div class="relative max-w-screen-xl px-6 mx-auto">
         <!-- Heading -->
@@ -118,36 +118,67 @@
     </div>
 </section>
 
-
-
-
-{{-- ================= Section 3: Steps ================= --}}
-<section class="bg-white py-20 relative">
-    <div class="max-w-screen-xl px-6 mx-auto">
-        <div class="max-w-2xl mx-auto text-center mb-16" data-aos="fade-up">
-            <h2 class="mb-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-                Mulai dalam 3 Langkah Mudah
-            </h2>
-            <p class="text-gray-600 sm:text-lg">Alur kerja sederhana dan intuitif untuk efisiensi maksimal.</p>
+<section class="bg-gray-50 py-20">
+    <div class="max-w-screen-xl px-4 mx-auto lg:px-6 space-y-20">
+        <!-- Heading -->
+        <div class="max-w-screen-md mx-auto text-center" data-aos="fade-up">
+            <h2 class="mb-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">Mulai dalam 3 Langkah Mudah</h2>
+            <p class="text-gray-600 sm:text-xl">Alur kerja yang sederhana dan intuitif untuk efisiensi maksimal.</p>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-            @foreach ([ 
-                ['num' => '1', 'title' => 'Atur Kategori', 'desc' => 'Buat kategori pemasukan & pengeluaran sesuai bisnis Anda.'],
-                ['num' => '2', 'title' => 'Catat Transaksi', 'desc' => 'Input semua transaksi harian dengan cepat dan terorganisir.'],
-                ['num' => '3', 'title' => 'Lihat Laporan', 'desc' => 'Analisis kesehatan finansial bisnis lewat laporan otomatis.'],
-            ] as $i => $step)
-            <div class="text-center" data-aos="fade-up" data-aos-delay="{{ ($i+1)*100 }}">
-                <div class="flex items-center justify-center mx-auto w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#01c350] to-[#009588] text-white shadow-lg">
-                    <span class="text-2xl font-bold">{{ $step['num'] }}</span>
-                </div>
-                <h3 class="mb-2 text-xl font-bold text-gray-900">{{ $step['title'] }}</h3>
-                <p class="text-gray-600">{{ $step['desc'] }}</p>
+
+        <!-- Step 1 -->
+        <div class="items-center gap-16 md:grid md:grid-cols-2">
+            <div data-aos="fade-right">
+                <img class="w-full rounded-lg shadow-lg" src="{{ asset('img/kategori.png')}}" alt="Atur Kategori">
             </div>
-            @endforeach
+            <div data-aos="fade-left">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#01c350] to-[#009588] text-white shadow-md">
+                        <span class="text-xl font-bold">1</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">Atur Kategori Anda</h3>
+                </div>
+                <p class="text-gray-600 text-lg">Mulailah dengan membuat kategori untuk setiap jenis pemasukan dan pengeluaran. Langkah pertama ini memastikan setiap transaksi tercatat dengan rapi dan terorganisir.</p>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="items-center gap-16 md:grid md:grid-cols-2">
+            <div class="md:order-2" data-aos="fade-left">
+                <img class="w-full rounded-lg shadow-lg" src="https://placehold.co/600x400/2f4858/FFFFFF?text=Screenshot+Transaksi" alt="Catat Transaksi">
+            </div>
+            <div class="md:order-1" data-aos="fade-right">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#01c350] to-[#009588] text-white shadow-md">
+                        <span class="text-xl font-bold">2</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">Catat Semua Transaksi</h3>
+                </div>
+                <p class="text-gray-600 text-lg">Masukkan setiap transaksi yang terjadi. Anda juga bisa mengunggah bukti transaksi jika perlu untuk arsip digital yang aman dan mudah diakses kembali.</p>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="items-center gap-16 md:grid md:grid-cols-2">
+            <div data-aos="fade-right">
+                <img class="w-full rounded-lg shadow-lg" src="https://placehold.co/600x400/FACC15/2f4858?text=Screenshot+Laporan" alt="Lihat Laporan">
+            </div>
+            <div data-aos="fade-left">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#01c350] to-[#009588] text-white shadow-md">
+                        <span class="text-xl font-bold">3</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">Lihat Laporan Otomatis</h3>
+                </div>
+                <p class="text-gray-600 text-lg">Sistem akan secara otomatis mengolah data Anda menjadi laporan Laba Rugi dan Buku Besar yang siap dianalisis untuk pengambilan keputusan bisnis yang lebih baik.</p>
+            </div>
         </div>
     </div>
 </section>
+
+
+
+
 
 
 @endsection
