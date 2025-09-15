@@ -23,13 +23,11 @@
 <body class="bg-gray-50" style="font-family: 'Poppins', sans-serif;">
 
     <!-- Header / Navbar Landing Page -->
-    {{-- PENYESUAIAN: Navbar disederhanakan, hanya menampilkan judul sistem --}}
     <header class="bg-white shadow-md sticky top-0 z-50">
-        {{-- PENYESUAIAN: Wrapper menu dan tombol hamburger dihapus --}}
+
         <nav class="container mx-auto px-4 py-4 flex justify-start items-center">
-            {{-- PENYESUAIAN: Warna teks utama diubah agar sesuai dengan palet warna gelap --}}
             <a href="/" class="text-2xl font-bold text-slate-800">
-                Keuangan<span class="text-[#01c350]">App</span>
+                my<span class="text-[#01c350]">Finance</span>
             </a>
         </nav>
     </header>
@@ -40,9 +38,9 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t">
+    <footer class="bg-white border-t mt-12">
         <div class="container mx-auto px-4 py-6 text-center text-gray-500">
-            &copy; {{ date('Y') }} KeuanganApp by <a href="https://techade.id/" target="_blank" class="text-[#01c350] hover:text-[#00ad75] transition-colors duration-300 hover:underline">Techade.id</a>. All Rights Reserved.
+            &copy; {{ date('Y') }} <a href="https://techade.id/" target="_blank" class="text-[#01c350] hover:text-[#00ad75] transition-colors duration-300 hover:underline">Techade.id</a>. All Rights Reserved.
         </div>
     </footer>
 

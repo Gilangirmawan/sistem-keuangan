@@ -1,6 +1,6 @@
 @extends('layouts.home')
 
-@section('title', 'Sistem Keuangan Sederhana untuk Bisnis Anda')
+@section('title', 'Sistem Pencatatan Keuangan untuk Semua Kebutuhan Anda')
 
 @section('content')
 
@@ -8,44 +8,40 @@
 <section class="relative overflow-hidden bg-gray-50" aria-labelledby="hero-heading">
     <div class="grid max-w-screen-xl px-6 pt-12 pb-24 mx-auto lg:gap-8 xl:gap-0 lg:grid-cols-12">
         
-        <!-- Left Content (hero uses CSS transitions, NOT AOS) -->
+        <!-- Left Content -->
         <div class="mr-auto place-self-center lg:col-span-7">
             <h1 id="hero-heading"
                 class="max-w-2xl mb-6 text-4xl font-extrabold tracking-tight leading-snug md:text-5xl xl:text-6xl text-gray-900
                        opacity-0 -translate-x-6 transform transition-all duration-700 ease-out">
-                Kelola Keuangan Bisnis, <span class="text-[#01c350]">Tanpa Ribet.</span>
+                Satu Tempat Untuk <span class="text-[#01c350]">Semua Catatan Keuangan Anda.</span>
             </h1>
 
             <p class="hero-sub max-w-2xl mb-8 font-medium text-gray-600 md:text-lg lg:text-xl leading-relaxed
-                      opacity-0 translate-y-4 transform transition-all duration-700 ease-out">
-                Dari pencatatan transaksi hingga laporan laba rugi otomatis.  
-                Fokus pada bisnis Anda, biarkan <span class="font-semibold text-gray-800">kami yang urus angkanya</span>.
+                       opacity-0 translate-y-4 transform transition-all duration-700 ease-out">
+                Dari kebutuhan sehari-hari hingga operasional bisnis, semua transaksi Anda tersimpan rapi, mudah diatur, dan dapat dianalisis tanpa ribet.
             </p>
             
             <a href="{{ route('login') }}" 
                class="hero-cta inline-flex items-center justify-center px-8 py-3 text-base font-bold text-center text-white rounded-xl
                       bg-gradient-to-r from-[#01c350] to-[#009588] hover:from-[#00ad75] hover:to-[#007b89]
                       shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#01c350]/40
-                      opacity-0 translate-y-4 transform transition-all duration-700 ease-out"
-               >
+                      opacity-0 translate-y-4 transform transition-all duration-700 ease-out">
                 Masuk ke Dashboard
                 <i class="fa-solid fa-arrow-right ml-2 -mr-1"></i>
             </a>
         </div>
 
-        <!-- Right Illustration (kehidupan: float + hover scale). kept AOS off here to avoid conflicts -->
+        <!-- Right Illustration -->
         <div class="relative hidden lg:flex lg:col-span-5">
             <img src="{{ asset('img/hero.png') }}" 
                  alt="Ilustrasi Keuangan"
-                 class="max-w-md w-full h-auto mx-auto drop-shadow-2xl transform hover:scale-105 transition-transform duration-500 ease-in-out float-animate will-change-transform" 
-                 >
-            <!-- Accent gradient circle -->
+                 class="max-w-md w-full h-auto mx-auto drop-shadow-2xl transform hover:scale-105 transition-transform duration-500 ease-in-out float-animate will-change-transform">
             <div class="absolute -z-10 top-10 right-10 w-72 h-72 bg-green-200 rounded-full blur-3xl opacity-40"></div>
         </div>                
     </div>
 </section>
 
-{{-- ================= Section 2: Fitur (AOS on-scroll) ================= --}}
+{{-- ================= Section 2: Fitur ================= --}}
 <section id="fitur" class="relative overflow-hidden py-32 bg-gradient-to-b from-[#01c350] to-[#009588]">
     
     <!-- Brush Top Separator -->
@@ -57,10 +53,6 @@
         </svg>
     </div>
 
-    {{-- <!-- background accents -->
-    <div class="absolute -top-10 -left-10 w-80 h-80 bg-white/10 rounded-full blur-3xl opacity-30"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl opacity-30"></div> --}}
-
     <div class="relative max-w-screen-xl px-6 mx-auto">
         <!-- Heading -->
         <div class="max-w-screen-md mx-auto text-center mb-16" data-aos="fade-up">
@@ -68,16 +60,16 @@
                 Platform Lengkap Untuk Keuangan Anda
             </h2>
             <p class="text-white/90 sm:text-xl">
-                Fitur yang dirancang untuk memberikan kemudahan dan kontrol penuh atas finansial bisnis Anda.
+                Fitur yang dirancang untuk memberikan kemudahan dan kontrol penuh atas finansial Anda.
             </p>
         </div>
         
-        <!-- Baris pertama (3 card) -->
+        <!-- Cards -->
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mb-8">
             @foreach ([
-                ['icon' => 'fa-money-bill-transfer', 'title' => 'Transaksi Cepat', 'desc' => 'Catat pemasukan dan pengeluaran dalam hitungan detik, lengkap dengan unggah bukti transaksi.'],
-                ['icon' => 'fa-tags', 'title' => 'Kategori Fleksibel', 'desc' => 'Kelompokkan transaksi ke dalam kategori yang bisa Anda sesuaikan sesuai kebutuhan.'],
-                ['icon' => 'fa-chart-pie', 'title' => 'Laporan Instan', 'desc' => 'Dapatkan laporan laba rugi otomatis tanpa perhitungan manual.'],
+                ['icon' => 'fa-money-bill-transfer', 'title' => 'Pencatatan Cepat', 'desc' => 'Baik pemasukan atau pengeluaran, catat dalam hitungan detik. Lampirkan bukti transfer atau nota untuk arsip digital.'],
+                ['icon' => 'fa-tags', 'title' => 'Kategori Fleksibel', 'desc' => "Kelompokkan transaksi sesuai kebutuhan Anda, dari 'Biaya Operasional' hingga 'Jajan Kopi'. Semuanya bisa disesuaikan."],
+                ['icon' => 'fa-chart-pie', 'title' => 'Laporan Visual', 'desc' => 'Grafik sederhana kami membantu Anda memahami kesehatan finansial dan melihat ke mana uang Anda pergi secara instan.'],
             ] as $i => $fitur)
             <div class="p-6 bg-white rounded-xl border border-gray-200/80 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                  data-aos="zoom-in" data-aos-delay="{{ ($i+1) * 100 }}">
@@ -90,11 +82,10 @@
             @endforeach
         </div>
 
-        <!-- Baris kedua (2 card center) -->
         <div class="flex flex-col sm:flex-row justify-center gap-8">
             @foreach ([
-                ['icon' => 'fa-book-open', 'title' => 'Buku Besar Rinci', 'desc' => 'Telusuri detail transaksi dalam format buku besar dengan saldo berjalan.'],
-                ['icon' => 'fa-file-export', 'title' => 'Ekspor Data', 'desc' => 'Ekspor laporan ke PDF atau CSV dengan sekali klik.'],
+                ['icon' => 'fa-book-open', 'title' => 'Riwayat Transaksi', 'desc' => 'Akses kembali catatan keuangan kapan saja. Gunakan filter dan pencarian untuk menemukan transaksi tertentu dengan cepat.'],
+                ['icon' => 'fa-file-export', 'title' => 'Ekspor Data', 'desc' => 'Butuh data untuk laporan atau analisis? Ekspor riwayat transaksi Anda ke format PDF atau CSV dengan sekali klik.'],
             ] as $j => $fitur)
             <div class="sm:w-80 p-6 bg-white rounded-xl border border-gray-200/80 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                  data-aos="zoom-in" data-aos-delay="{{ ($j+1) * 100 }}">
@@ -118,68 +109,33 @@
     </div>
 </section>
 
+{{-- ================= Section 3: Steps (No Images) ================= --}}
 <section class="bg-gray-50 py-20">
-    <div class="max-w-screen-xl px-4 mx-auto lg:px-6 space-y-20">
+    <div class="max-w-screen-xl px-4 mx-auto lg:px-6">
         <!-- Heading -->
-        <div class="max-w-screen-md mx-auto text-center" data-aos="fade-up">
-            <h2 class="mb-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">Mulai dalam 3 Langkah Mudah</h2>
-            <p class="text-gray-600 sm:text-xl">Alur kerja yang sederhana dan intuitif untuk efisiensi maksimal.</p>
+        <div class="max-w-screen-md mx-auto text-center mb-16" data-aos="fade-up">
+            <h2 class="mb-4 text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">Begini Cara Kerjanya.</h2>
+            <p class="text-gray-600 sm:text-xl">Dirancang agar Anda bisa langsung nyaman menggunakannya, tanpa perlu panduan tebal.</p>
         </div>
 
-        <!-- Step 1 -->
-        <div class="items-center gap-16 md:grid md:grid-cols-2">
-            <div data-aos="fade-right">
-                <img class="w-full rounded-lg shadow-lg" src="{{ asset('img/kategori.png')}}" alt="Atur Kategori">
-            </div>
-            <div data-aos="fade-left">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#01c350] to-[#009588] text-white shadow-md">
-                        <span class="text-xl font-bold">1</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900">Atur Kategori Anda</h3>
+        <!-- Steps Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            @foreach ([ 
+                ['num' => '1', 'title' => 'Atur Kategori', 'desc' => 'Tentukan kategori sesuai kebutuhan, baik pribadi maupun bisnis, agar setiap transaksi punya tempatnya sendiri.'],
+                ['num' => '2', 'title' => 'Catat Transaksi', 'desc' => 'Setiap kali ada transaksi, langsung catat saat itu juga. Prosesnya cepat, jadi tidak akan mengganggu aktivitas Anda.'],
+                ['num' => '3', 'title' => 'Lihat Hasilnya', 'desc' => 'Biarkan sistem yang bekerja mengubah angka-angka Anda menjadi laporan visual yang mudah dipahami dan siap dianalisis.'],
+            ] as $i => $step)
+            <div class="text-center" data-aos="fade-up" data-aos-delay="{{ ($i+1)*100 }}">
+                <div class="flex items-center justify-center mx-auto w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#01c350] to-[#009588] text-white shadow-lg">
+                    <span class="text-2xl font-bold">{{ $step['num'] }}</span>
                 </div>
-                <p class="text-gray-600 text-lg">Mulailah dengan membuat kategori untuk setiap jenis pemasukan dan pengeluaran. Langkah pertama ini memastikan setiap transaksi tercatat dengan rapi dan terorganisir.</p>
+                <h3 class="mb-2 text-xl font-bold text-gray-900">{{ $step['title'] }}</h3>
+                <p class="text-gray-600">{{ $step['desc'] }}</p>
             </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="items-center gap-16 md:grid md:grid-cols-2">
-            <div class="md:order-2" data-aos="fade-left">
-                <img class="w-full rounded-lg shadow-lg" src="https://placehold.co/600x400/2f4858/FFFFFF?text=Screenshot+Transaksi" alt="Catat Transaksi">
-            </div>
-            <div class="md:order-1" data-aos="fade-right">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#01c350] to-[#009588] text-white shadow-md">
-                        <span class="text-xl font-bold">2</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900">Catat Semua Transaksi</h3>
-                </div>
-                <p class="text-gray-600 text-lg">Masukkan setiap transaksi yang terjadi. Anda juga bisa mengunggah bukti transaksi jika perlu untuk arsip digital yang aman dan mudah diakses kembali.</p>
-            </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="items-center gap-16 md:grid md:grid-cols-2">
-            <div data-aos="fade-right">
-                <img class="w-full rounded-lg shadow-lg" src="https://placehold.co/600x400/FACC15/2f4858?text=Screenshot+Laporan" alt="Lihat Laporan">
-            </div>
-            <div data-aos="fade-left">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#01c350] to-[#009588] text-white shadow-md">
-                        <span class="text-xl font-bold">3</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900">Lihat Laporan Otomatis</h3>
-                </div>
-                <p class="text-gray-600 text-lg">Sistem akan secara otomatis mengolah data Anda menjadi laporan Laba Rugi dan Buku Besar yang siap dianalisis untuk pengambilan keputusan bisnis yang lebih baik.</p>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
-
-
-
-
-
 
 @endsection
 
@@ -197,7 +153,7 @@
   animation: float 5s ease-in-out infinite;
 }
 
-/* accessible reduced-motion fallback */
+/* Fallback untuk accessible reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .float-animate { animation: none; }
   .hero-cta, .hero-sub, #hero-heading { transition: none !important; }
@@ -209,7 +165,7 @@
 <!-- AOS JS -->
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-  // Init AOS (for on-scroll sections)
+  // Init AOS
   AOS.init({
     duration: 850,
     once: true,
@@ -218,19 +174,17 @@
     mirror: false,
   });
 
-  // HERO: Use JS-driven class toggles (on window.load) so animation always fires on refresh.
+  // Animasi Hero saat window load
   window.addEventListener('load', function () {
-    // small delays for staged entrance
     const title = document.getElementById('hero-heading');
     const sub = document.querySelector('.hero-sub');
     const cta = document.querySelector('.hero-cta');
 
-    // safety checks
     if (title) {
       setTimeout(() => {
         title.classList.remove('opacity-0', '-translate-x-6');
         title.classList.add('opacity-100', 'translate-x-0');
-      }, 80); // small initial delay
+      }, 80);
     }
 
     if (sub) {
@@ -246,11 +200,11 @@
         cta.classList.add('opacity-100', 'translate-y-0');
       }, 360);
     }
-
-    // ensure AOS recalculates positions after everything loaded
+    
     if (window.AOS && typeof window.AOS.refresh === 'function') {
       setTimeout(() => { window.AOS.refresh(); }, 50);
     }
   });
 </script>
 @endpush
+
