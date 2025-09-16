@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('main');
 })->middleware('guest')->name('home');
 
+Route::get('/preview', [App\Http\Controllers\HomeController::class, 'index'])
+    ->middleware('guest')
+    ->name('preview');
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])
     ->middleware('guest')
     ->name('login');

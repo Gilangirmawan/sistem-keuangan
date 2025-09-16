@@ -13,22 +13,28 @@
             <h1 id="hero-heading"
                 class="max-w-2xl mb-6 text-4xl font-extrabold tracking-tight leading-snug md:text-5xl xl:text-6xl text-gray-900
                        opacity-0 -translate-x-6 transform transition-all duration-700 ease-out">
-                Satu Tempat Untuk <span class="text-[#01c350]">Semua Catatan Keuangan Anda.</span>
+                Satu Tempat untuk Semua <span class="text-[#01c350]">Urusan Keuangan.</span>
             </h1>
 
             <p class="hero-sub max-w-2xl mb-8 font-medium text-gray-600 md:text-lg lg:text-xl leading-relaxed
                        opacity-0 translate-y-4 transform transition-all duration-700 ease-out">
-                Dari kebutuhan sehari-hari hingga operasional bisnis, semua transaksi Anda tersimpan rapi, mudah diatur, dan dapat dianalisis tanpa ribet.
+                Baik untuk melacak pengeluaran pribadi, maupun mengelola arus kas bisnis, sistem kami memberikan kejelasan yang Anda butuhkan untuk mengambil keputusan finansial yang lebih cerdas.
             </p>
             
-            <a href="{{ route('login') }}" 
-               class="hero-cta inline-flex items-center justify-center px-8 py-3 text-base font-bold text-center text-white rounded-xl
-                      bg-gradient-to-r from-[#01c350] to-[#009588] hover:from-[#00ad75] hover:to-[#007b89]
-                      shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#01c350]/40
-                      opacity-0 translate-y-4 transform transition-all duration-700 ease-out">
-                Masuk ke Dashboard
-                <i class="fa-solid fa-arrow-right ml-2 -mr-1"></i>
-            </a>
+            <div class="hero-actions flex flex-col sm:flex-row items-start sm:items-center sm:space-x-4 opacity-0 translate-y-4 transform transition-all duration-700 ease-out">
+                <a href="{{ route('login') }}" 
+                   class="inline-flex items-center justify-center w-full sm:w-auto px-8 py-3 mb-3 sm:mb-0 text-base font-bold text-center text-white rounded-xl
+                          bg-gradient-to-r from-[#01c350] to-[#009588] hover:from-[#00ad75] hover:to-[#007b89]
+                          shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#01c350]/40 transition-all">
+                    Masuk ke Dashboard
+                    <i class="fa-solid fa-arrow-right ml-2 -mr-1"></i>
+                </a>
+                <a href="/preview" 
+                   class="inline-flex items-center justify-center w-full sm:w-auto px-8 py-3 text-base font-bold text-center text-gray-800 bg-white rounded-xl border border-gray-300
+                          hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 shadow-md hover:shadow-lg transition-all">
+                    Preview Fitur
+                </a>
+            </div>
         </div>
 
         <!-- Right Illustration -->
@@ -178,7 +184,7 @@
   window.addEventListener('load', function () {
     const title = document.getElementById('hero-heading');
     const sub = document.querySelector('.hero-sub');
-    const cta = document.querySelector('.hero-cta');
+    const cta = document.querySelector('.hero-actions');
 
     if (title) {
       setTimeout(() => {
