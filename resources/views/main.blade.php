@@ -1,7 +1,5 @@
 @extends('layouts.home')
 
-@section('title', 'Sistem Pencatatan Keuangan untuk Semua Kebutuhan Anda')
-
 @section('content')
 
 {{-- ================= Section 1: Hero ================= --}}
