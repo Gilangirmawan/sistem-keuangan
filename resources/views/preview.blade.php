@@ -1,6 +1,6 @@
 @extends('layouts.home')
 
-@section('title', 'Preview Fitur - KeuanganApp')
+@section('title', 'Preview Fitur - myFinance')
 
 @section('content')
 
@@ -12,7 +12,7 @@
                 Jelajahi Fitur Unggulan Kami
             </h1>
             <p class="text-gray-600 sm:text-xl">
-                Lihat lebih dekat bagaimana KeuanganApp dapat menyederhanakan pencatatan finansial Anda, langkah demi langkah.
+                Lihat lebih dekat bagaimana myFinance dapat menyederhanakan pencatatan finansial Anda, langkah demi langkah.
             </p>
         </div>
         <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="100">
@@ -31,10 +31,10 @@
 
         <!-- Fitur 1: Dashboard -->
         <div class="items-center gap-12 lg:gap-16 md:grid md:grid-cols-2">
-            <div class="mb-8 md:mb-0" data-aos="fade-right">
+            <div class="mb-8 md:mb-0" data-aos="fade-right" data-aos-delay="200">
                 <img class="w-full rounded-lg shadow-lg aspect-video object-cover object-top" src="{{ asset('img/dashboard.png') }}" alt="Tampilan Dashboard">
             </div>
-            <div data-aos="fade-left">
+            <div data-aos="fade-left" data-aos-delay="200">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#01c350] to-[#009588] text-white shadow-md">
                         <i class="fa-solid fa-tachometer-alt text-xl"></i>
@@ -73,7 +73,7 @@
             <div data-aos="fade-left">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#01c350] to-[#009588] text-white shadow-md">
-                        <i class="fa-solid fa-arrow-down-short-wide text-xl"></i>
+                        <i class="fa-solid fa-wallet text-xl"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900">Catat Pemasukan</h3>
                 </div>
@@ -91,7 +91,7 @@
             <div class="md:order-1" data-aos="fade-right">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#01c350] to-[#009588] text-white shadow-md">
-                        <i class="fa-solid fa-arrow-up-wide-short text-xl"></i>
+                        <i class="fa-solid fa-money-bill-wave text-xl"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900">Catat Pengeluaran</h3>
                 </div>
@@ -132,7 +132,7 @@
                     <h3 class="text-2xl font-bold text-gray-900">Laporan Buku Besar</h3>
                 </div>
                 <p class="text-gray-600 text-lg">
-                   Telusuri setiap transaksi secara mendetail. Laporan Buku Besar menyajikan riwayat lengkap dengan saldo berjalan, dan dapat diekspor ke PDF atau CSV untuk keperluan audit atau analisis lebih lanjut.
+                    Telusuri setiap transaksi secara mendetail. Laporan Buku Besar menyajikan riwayat lengkap dengan saldo berjalan, dan dapat diekspor ke PDF atau CSV untuk keperluan audit atau analisis lebih lanjut.
                 </p>
             </div>
         </div>
@@ -171,14 +171,15 @@
 <!-- AOS JS -->
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-  // Init AOS
-  AOS.init({
-    duration: 850,
-    once: true,
-    offset: 80,
-    easing: 'ease-out-cubic',
-    mirror: false,
-  });
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            duration: 850,
+            once: true,
+            offset: 80,
+            easing: 'ease-out-cubic',
+            mirror: false,
+        });
+    });
 </script>
 @endpush
 
