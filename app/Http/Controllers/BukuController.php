@@ -65,8 +65,8 @@ class BukuController extends Controller
 
         $saldo = 0;
         $bukuBesar = $semuaTransaksi->map(function ($item) use (&$saldo) {
-            $debit = ($item->jenis_transaksi == 'pemasukan') ? $item->jumlah : 0;
-            $kredit = ($item->jenis_transaksi == 'pengeluaran') ? $item->jumlah : 0;
+            $debit = ($item->jenis_transaksi == 'pemasukan') ? $item->total : 0;
+            $kredit = ($item->jenis_transaksi == 'pengeluaran') ? $item->total : 0;
 
             $saldo += $debit - $kredit;
 
@@ -113,8 +113,8 @@ class BukuController extends Controller
 
             $saldo = 0;
             foreach ($semuaTransaksi as $item) {
-                $debit = ($item->jenis_transaksi == 'pemasukan') ? $item->jumlah : 0;
-                $kredit = ($item->jenis_transaksi == 'pengeluaran') ? $item->jumlah : 0;
+                $debit = ($item->jenis_transaksi == 'pemasukan') ? $item->total : 0;
+                $kredit = ($item->jenis_transaksi == 'pengeluaran') ? $item->total : 0;
                 $saldo += $debit - $kredit;
 
                 // Tulis baris data
