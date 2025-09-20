@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
             $table->enum('jenis_transaksi', ['pemasukan', 'pengeluaran']);
-            $table->foreignId('id_kategori')->constrained('kategori')->onDelete('cascade');
+            $table->foreignId('id_kategori')->nullable()->constrained('kategori')->onDelete('set null');
             $table->decimal('jumlah', 15, 2)->default(0);
             $table->decimal('total', 15, 2);
             $table->enum('status', ['profit', 'loss'])->nullable();
