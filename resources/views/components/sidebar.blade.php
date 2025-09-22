@@ -76,6 +76,30 @@
                 </a> --}}
             </div>
         </div>
+
+        <div x-data="{ open: {{ request()->routeIs(['admin.profile.edit']) ? 'true' : 'false' }} }">
+            <button @click="open = !open"
+                    class="flex items-center justify-between gap-3 px-4 py-2 rounded-lg w-full text-left transition-colors duration-200 {{ request()->routeIs('admin.profile.edit') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-800' }}">
+                <span class="flex items-center gap-3">
+                    <i class="fa-solid fa-gears w-5 text-center"></i>
+                    <span>Pengaturan</span>
+                </span>
+                <svg :class="{ 'rotate-180': open }" class="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+
+            <div x-show="open" x-transition class="mt-1 ml-5 pl-3 border-l-2 border-gray-700 flex flex-col">
+                <a href="{{ route('admin.profile.edit') }}"
+                    class="flex items-center gap-3 px-4 py-2 rounded text-sm transition-colors duration-200 {{ request()->routeIs('admin.profile.edit') ? 'bg-gray-800 text-white font-semibold border-l-4 border-[#01c350]' : 'text-gray-300 hover:bg-gray-800' }}"">
+                    <i class="fa-solid fa-user-pen w-5 text-center"></i> <span>Profil Saya</span>
+                </a>
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-gray-400 cursor-not-allowed">
+                    <i class="fa-solid fa-sliders w-5 text-center"></i> <span>Pengaturan Sistem</span>
+                </a>
+            </div>
+        </div>
     </nav>
 
     <div class="p-4 border-t border-gray-700">
@@ -83,7 +107,7 @@
             @csrf
             <a href="{{ route('logout') }}" 
                 onclick="event.preventDefault(); this.closest('form').submit();"
-                class="flex items-center gap-3 px-4 py-2 rounded text-red-500 hover:bg-red-500 hover:text-white transition-colors duration-200">
+                class="flex items-center gap-3 px-4 py-2 rounded text-red-500 hover:bg-red-700 hover:text-white transition-colors duration-100">
                 <i class="fas fa-sign-out-alt w-5 text-center"></i> <span>Log Out</span>
             </a>
         </form>
