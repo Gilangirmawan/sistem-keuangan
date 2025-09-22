@@ -6,7 +6,7 @@
 <section class="relative overflow-hidden bg-gray-50" aria-labelledby="hero-heading">
     <div class="grid max-w-screen-xl px-6 pt-12 pb-24 mx-auto lg:gap-8 xl:gap-0 lg:grid-cols-12">
         
-        <!-- Left Content -->
+        <!-- Tagline -->
         <div class="mr-auto place-self-center lg:col-span-7">
             <h1 id="hero-heading"
                 class="max-w-2xl mb-6 text-4xl font-extrabold tracking-tight leading-snug md:text-5xl xl:text-6xl text-gray-900
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <!-- Right Illustration -->
+        <!-- Hero -->
         <div class="relative hidden lg:flex lg:col-span-5">
             <img src="{{ asset('img/hero.png') }}" 
                  alt="Ilustrasi Keuangan"
@@ -48,7 +48,7 @@
 {{-- ================= Section 2: Fitur ================= --}}
 <section id="fitur" class="relative overflow-hidden py-32 bg-gradient-to-b from-[#01c350] to-[#009588]">
     
-    <!-- Brush Top Separator -->
+    <!-- Brush Top -->
     <div class="absolute top-0 left-0 w-full overflow-hidden leading-[0] -translate-y-[1px]">
         <svg class="relative block w-full h-24 text-gray-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M0,0 C150,30 350,0 600,20 C850,40 1050,0 1200,30 L1200,0 L0,0 Z" fill="currentColor"/>
@@ -68,7 +68,6 @@
             </p>
         </div>
         
-        <!-- Cards -->
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mb-8">
             @foreach ([
                 ['icon' => 'fa-money-bill-transfer', 'title' => 'Pencatatan Cepat', 'desc' => 'Baik pemasukan atau pengeluaran, catat dalam hitungan detik. Lampirkan bukti transfer atau nota untuk arsip digital.'],
@@ -103,7 +102,7 @@
         </div>
     </div>
 
-    <!-- Brush Bottom Separator -->
+    <!-- Brush Bottom -->
     <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] translate-y-[2px]">
         <svg class="relative block w-full h-32 text-gray-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M0,120 C150,90 350,120 600,100 C850,80 1050,120 1200,90 L1200,120 L0,120 Z" fill="currentColor"/>
@@ -113,7 +112,7 @@
     </div>
 </section>
 
-{{-- ================= Section 3: Steps (No Images) ================= --}}
+{{-- ================= Section 3: Steps ================= --}}
 <section class="bg-gray-50 py-20">
     <div class="max-w-screen-xl px-4 mx-auto lg:px-6">
         <!-- Heading -->
@@ -122,7 +121,6 @@
             <p class="text-gray-600 sm:text-xl">Dirancang agar Anda bisa langsung nyaman menggunakannya, tanpa perlu panduan tebal.</p>
         </div>
 
-        <!-- Steps Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
             @foreach ([ 
                 ['num' => '1', 'title' => 'Atur Kategori', 'desc' => 'Tentukan kategori sesuai kebutuhan, baik pribadi maupun bisnis, agar setiap transaksi punya tempatnya sendiri.'],
@@ -144,10 +142,10 @@
 @endsection
 
 @push('styles')
-<!-- AOS CSS -->
+
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 <style>
-/* Efek floating halus untuk ilustrasi hero */
+
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -157,7 +155,7 @@
   animation: float 5s ease-in-out infinite;
 }
 
-/* Fallback untuk accessible reduced-motion */
+
 @media (prefers-reduced-motion: reduce) {
   .float-animate { animation: none; }
   .hero-cta, .hero-sub, #hero-heading { transition: none !important; }
@@ -169,7 +167,7 @@
 <!-- AOS JS -->
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-  // Init AOS
+
   AOS.init({
     duration: 850,
     once: true,
@@ -178,7 +176,6 @@
     mirror: false,
   });
 
-  // Animasi Hero saat window load
   window.addEventListener('load', function () {
     const title = document.getElementById('hero-heading');
     const sub = document.querySelector('.hero-sub');

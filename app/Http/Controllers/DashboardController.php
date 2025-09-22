@@ -12,15 +12,12 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // 1. Menghitung Sisa Saldo Terkini
         $totalPemasukan = Transaksi::where('jenis_transaksi', 'pemasukan')->sum('total');
         $totalPengeluaran = Transaksi::where('jenis_transaksi', 'pengeluaran')->sum('total');
         $sisaSaldo = $totalPemasukan - $totalPengeluaran;
 
-        // 2. Mengambil data untuk Grafik (Income vs Expense per Bulan)
         $tahunIni = Carbon::now()->year;
 
-        // Inisialisasi array 12 bulan dengan nilai 0
         $pemasukanPerBulan = array_fill(0, 12, 0);
         $pengeluaranPerBulan = array_fill(0, 12, 0);
 
@@ -34,7 +31,7 @@ class DashboardController extends Controller
             ->get();
 
         foreach ($transaksiTahunIni as $transaksi) {
-            $bulanIndex = $transaksi->bulan - 1; // Array index mulai dari 0
+            $bulanIndex = $transaksi->bulan - 1;
             if ($transaksi->jenis_transaksi == 'pemasukan') {
                 $pemasukanPerBulan[$bulanIndex] = $transaksi->total;
             } else {
@@ -42,7 +39,6 @@ class DashboardController extends Controller
             }
         }
         
-        // 3. Mengambil 5 Transaksi Terbaru
         $transaksiTerbaru = Transaksi::with('kategori')->latest()->take(5)->get();
 
         return view('admin.dashboard', compact(

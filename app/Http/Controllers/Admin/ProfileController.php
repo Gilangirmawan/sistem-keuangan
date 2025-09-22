@@ -16,7 +16,7 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        // Mengambil data pengguna yang sedang login
+
         $user = auth::User();
         return view('admin.profile', compact('user'));
     }
@@ -29,7 +29,6 @@ class ProfileController extends Controller
         /** @var \App\Models\User $user */
         $user = auth::User();
 
-        // Mengambil data yang sudah divalidasi dari Form Request
         $validatedData = $request->validated();
 
 

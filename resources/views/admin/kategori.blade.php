@@ -38,7 +38,6 @@
         </button>
     </div>
     
-    <!-- Pesan Notifikasi Sukses -->
     @if (session('success'))
         <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
              x-transition
@@ -47,7 +46,7 @@
         </div>
     @endif
 
-    <!-- Konten Utama: Card dengan Tabs dan Tabel -->
+
     <div class="bg-white rounded-xl shadow-md">
         <!-- Tabs -->
         <div class="border-b border-gray-200">
@@ -67,7 +66,6 @@
             </ul>
         </div>
 
-        <!-- Kontainer Tabel -->
         <div class="p-0 md:p-4">
             <!-- Tabel Pemasukan -->
             <div id="tab-pemasukan" class="relative overflow-x-auto">

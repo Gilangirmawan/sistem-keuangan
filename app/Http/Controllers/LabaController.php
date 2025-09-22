@@ -13,11 +13,10 @@ class LabaController extends Controller
         $bulan = $request->input('bulan', Carbon::now()->month);
         $tahun = $request->input('tahun', Carbon::now()->year);
 
-        // Buat query dasar untuk filter bulan dan tahun
         $query = Transaksi::whereYear('created_at', $tahun)
                           ->whereMonth('created_at', $bulan);
 
-        // Hitung total pemasukan dan pengeluaran dari SEMUA data yang difilter (sebelum pagination)
+        // Hitung total pemasukan dan pengeluaran dari semua data yang difilter
         $totalPemasukan = (clone $query)->where('jenis_transaksi', 'pemasukan')->sum('total');
         $totalPengeluaran = (clone $query)->where('jenis_transaksi', 'pengeluaran')->sum('total');
 

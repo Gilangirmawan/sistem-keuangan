@@ -22,7 +22,6 @@
 </head>
 <body class="bg-gray-50" style="font-family: 'Poppins', sans-serif;">
 
-    <!-- Header / Navbar Landing Page -->
     <header class="bg-white shadow-md sticky top-0 z-50">
 
         <nav class="container mx-auto px-4 py-4 flex justify-start items-center">

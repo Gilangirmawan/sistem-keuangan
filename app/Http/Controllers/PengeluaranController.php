@@ -16,7 +16,7 @@ class PengeluaranController extends Controller
         $pengeluaran = Transaksi::where('jenis_transaksi', 'pengeluaran')
             ->with('kategori')
             ->latest()
-            ->paginate(5); // <-- pagination aktif
+            ->paginate(5);
 
         return view('admin.pengeluaran', compact('pengeluaran', 'kategori'));
     }
@@ -47,9 +47,6 @@ class PengeluaranController extends Controller
         return redirect()->back()->with('success', 'Data pengeluaran berhasil ditambahkan');
     }
 
-    /**
-     * Perbaikan: Mengubah nama variabel dari $transaksi menjadi $pengeluaran
-     */
     public function update(Request $request, Transaksi $pengeluaran)
     {
         $request->validate([
@@ -79,9 +76,6 @@ class PengeluaranController extends Controller
         return redirect()->back()->with('success', 'Data pengeluaran berhasil diperbarui');
     }
 
-    /**
-     * Perbaikan: Mengubah nama variabel dari $transaksi menjadi $pengeluaran
-     */
     public function destroy(Transaksi $pengeluaran)
     {
         if ($pengeluaran->bukti_transaksi && Storage::disk('public')->exists($pengeluaran->bukti_transaksi)) {

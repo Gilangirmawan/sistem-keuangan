@@ -11,7 +11,6 @@
         <p class="text-gray-500">Rincian lengkap semua transaksi yang tercatat dalam sistem.</p>
     </div>
 
-    <!-- Kontrol Laporan: Filter & Ekspor -->
     <div class="bg-white p-4 rounded-xl shadow-md mb-6">
         <div class="space-y-4">
             <!-- Filter -->
@@ -57,7 +56,6 @@
         </div>
     </div>
 
-    <!-- Konten Utama: Card dengan Tabel Rincian -->
     <div class="bg-white rounded-xl shadow-md">
         <div class="p-4 border-b">
             <h3 class="text-lg font-semibold text-gray-700">Rincian Transaksi</h3>

@@ -13,11 +13,8 @@
         </div>
 
         <div class="flex items-center space-x-3 fixed right-4 ">
-            <!-- Kelas `hidden sm:block` DIHAPUS dari div ini -->
             <div class="text-right">
-                <!-- Nama pengguna sekarang selalu terlihat -->
                 <p class="font-semibold">{{ Auth::user()->nama ?? 'Admin' }}</p>
-                <!-- Role akan disembunyikan di mobile (layar di bawah sm) -->
                 <p class="text-xs text-gray-200">{{ Auth::user()->role ?? 'Administrator' }}</p>
             </div>
         </div>

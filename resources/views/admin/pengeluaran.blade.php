@@ -3,13 +3,7 @@
 @section('title', 'Manajemen Pengeluaran')
 
 @section('content')
-{{-- 
-    PENYEMPURNAAN:
-    - Migrasi penuh ke Alpine.js untuk semua modal.
-    - Menambahkan watcher untuk mengunci scroll body saat modal aktif.
-    - Tabel diubah menjadi format kartu di mobile agar responsif.
-    - Tampilan tabel desktop disempurnakan.
---}}
+
 <div x-data="{
     isModalTambahOpen: false,
     isModalEditOpen: false,
@@ -41,7 +35,6 @@
         </button>
     </div>
 
-    <!-- Pesan Notifikasi Sukses -->
     @if (session('success'))
         <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
             x-transition
@@ -50,7 +43,6 @@
         </div>
     @endif
 
-    <!-- Konten Utama: Card dengan Tabel -->
     <div class="bg-white rounded-xl shadow-md">
         <div class="p-4 border-b">
             <h3 class="text-lg font-semibold text-gray-700">Daftar Pengeluaran</h3>

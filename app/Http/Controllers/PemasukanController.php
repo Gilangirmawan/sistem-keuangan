@@ -11,11 +11,11 @@ class PemasukanController extends Controller
 {
     public function index()
     {
-        // Ambil data pemasukan dengan relasi kategori + pagination
+
         $pemasukan = Transaksi::where('jenis_transaksi', 'pemasukan')
             ->with('kategori')
             ->latest()
-            ->paginate(5); // <-- pagination aktif
+            ->paginate(5);
 
         $kategori = Kategori::all();
 

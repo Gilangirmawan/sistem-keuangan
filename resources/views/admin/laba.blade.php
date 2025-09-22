@@ -14,7 +14,6 @@
     <!-- Kontrol Filter dan Ekspor -->
     <div class="bg-white p-4 rounded-xl shadow-md mb-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <!-- Form Filter -->
             <form action="{{ route('admin.laba.index') }}" method="GET" class="flex flex-col sm:flex-row sm:items-center gap-2">
                 <select name="bulan" class="w-full sm:w-auto border-gray-300 rounded-lg shadow-sm text-sm focus:ring-green-500 focus:border-green-500">
                     @for ($m = 1; $m <= 12; $m++)
@@ -37,7 +36,6 @@
 
     <!-- Kartu Ringkasan Laba Rugi -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <!-- Total Pemasukan -->
         <div class="bg-green-50 p-6 rounded-xl border border-green-200">
             <div class="flex items-center gap-4">
                 <div class="bg-green-100 p-3 rounded-full">
@@ -75,10 +73,8 @@
         </div>
     </div>
 
-    <!-- Konten Utama: Card dengan Tabel Rincian -->
     <div class="bg-white rounded-xl shadow-md">
         <div class="p-4 border-b flex justify-between items-center">
-            {{-- PERBAIKAN ERROR CARBON ADA DI SINI --}}
             <h3 class="text-lg font-semibold text-gray-700">Rincian Transaksi - {{ \Carbon\Carbon::create()->month((int)$bulan)->isoFormat('MMMM') }} {{ $tahun }}</h3>
         </div>
         <div class="relative overflow-x-auto">

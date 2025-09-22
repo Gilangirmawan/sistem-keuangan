@@ -13,7 +13,6 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // Pastikan user sudah login
         if (!Auth::check()) {
             return redirect('/login');
         }
